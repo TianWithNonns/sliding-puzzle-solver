@@ -35,5 +35,8 @@
   "bugs": {
     "url": "https://github.com/jweilhammer/SlidingPuzzle/issues"
   },
-  "homepage": "https://github.com/jweilhammer/SlidingPuzzle#readme"
+  "homepage": "https://github.com/jweilhammer/SlidingPuzzle#readme",
+  "dependencies": {
+    "terser-webpack-plugin": "^5.3.14"
+  }
 }
