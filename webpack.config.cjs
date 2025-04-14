@@ -46,6 +46,11 @@ const config = {
         favicon: './public/favicon.ico'
     }),
   ],
+  devServer: {
+    allowedHosts: 'all',
+    host: '0.0.0.0',
+    port: 8080,
+  },
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
