@@ -114,18 +114,15 @@ const shufflePuzzle = () => {
 	for (let row = 0; row < state.puzzleRows; row++) {
 		for (let col = 0; col < state.puzzleCols; col++) {
 			let value = puzzle_arr.shift();
-			// 确保state.grid和每个tile都存在
-			if (state.grid && state.grid[row] && state.grid[row][col]) {
-				const tile = state.grid[row][col];
-				if (value === 0) {
-					tile.textContent = "";
-					tile.style.opacity = "0";
-					tile.style.backgroundPosition = `${bgPositions[""].y}% ${bgPositions[""].x}%`;
-				} else {
-					tile.textContent = value;
-					tile.style.opacity = "1";
-					tile.style.backgroundPosition = `${bgPositions[value].y}% ${bgPositions[value].x}%`;
-				}
+			const tile = state.grid[row][col];
+			if (value === 0) {
+				tile.textContent = "";
+				tile.style.opacity = "0";
+				tile.style.backgroundPosition = `${bgPositions[""].y}% ${bgPositions[""].x}%`;
+			} else {
+				tile.textContent = value;
+				tile.style.opacity = "1";
+				tile.style.backgroundPosition = `${bgPositions[value].y}% ${bgPositions[value].x}%`;
 			}
 		}
 	}
@@ -178,30 +175,24 @@ const getPuzzleFromGrid = () => {
 const initializeUiElements = () => {
 	initializeDropdownAlgorithms();
 
-    // Button onclick event listeners - 使用安全的事件监听器添加方法
-    safeAddEventListener("resetBtn", "click", resetPuzzle);
-    safeAddEventListener("shuffleBtn", "click", shufflePuzzle);
-    safeAddEventListener("randomizeBtn", "click", randomizePuzzle);
-    safeAddEventListener("rotatePuzzleBtn", "click", rotatePuzzle);
-    safeAddEventListener("imageInputURL", "change", handleImageURL);
-    safeAddEventListener("toggleBordersBtn", "click", toggleBorders);
-    safeAddEventListener("toggleNumbersBtn", "click", toggleNumbers);
-    safeAddEventListener("imageUploadInput", "change", handleImageUpload);
-    safeAddEventListener("flipPuzzleVerticalBtn", "click", flipPuzzleVertically);
-    safeAddEventListener("flipImageVerticalBtn", "click", flipBackgroundVertically);
-    safeAddEventListener("flipPuzzleHorizontalBtn", "click", flipPuzzleHorizontally);
-    safeAddEventListener("flipImageHorizontalBtn", "click", flipBackgroundHorizontally);
-    safeAddEventListener("editGoalBtn", "click", () => {
-        enableGoalEditMode();
-    });
-    
-    // 对已经获取的元素引用也进行检查
-    if (playButton) {
-        playButton.addEventListener("click", () => { enablePlayMode() });
-    }
-    if (editStartBtn) {
-        editStartBtn.addEventListener("click", () => { enableStartEditMode() });
-    }
+    // Button onclick event listeners
+	document.getElementById("resetBtn").addEventListener("click", resetPuzzle);
+	document.getElementById("shuffleBtn").addEventListener("click", shufflePuzzle);
+	document.getElementById("randomizeBtn").addEventListener("click", randomizePuzzle);
+	document.getElementById("rotatePuzzleBtn").addEventListener("click", rotatePuzzle);
+	document.getElementById("imageInputURL").addEventListener("change", handleImageURL);
+	document.getElementById("toggleBordersBtn").addEventListener("click", toggleBorders);
+	document.getElementById("toggleNumbersBtn").addEventListener("click", toggleNumbers);
+	document.getElementById("imageUploadInput").addEventListener("change", handleImageUpload);
+	document.getElementById("flipPuzzleVerticalBtn").addEventListener("click", flipPuzzleVertically);
+	document.getElementById("flipImageVerticalBtn").addEventListener("click", flipBackgroundVertically);
+	document.getElementById("flipPuzzleHorizontalBtn").addEventListener("click", flipPuzzleHorizontally);
+	document.getElementById("flipImageHorizontalBtn").addEventListener("click", flipBackgroundHorizontally);
+	document.getElementById("editGoalBtn").addEventListener("click", () => {
+		enableGoalEditMode();
+	});
+	playButton.addEventListener("click", () => { enablePlayMode() });
+	editStartBtn.addEventListener("click", () => { enableStartEditMode() });
 
 
 	// Keep puzzle the same dimensions as our row/col inputs
@@ -877,17 +868,11 @@ const flipBackground = () => {
 };
 
 const resetBackgroundPositions = () => {
-	if (!state.grid) return;
-	
 	const bgPositions = getBackgroundPositions(state.puzzleRows, state.puzzleCols);
 	state.grid.forEach((r, row) => {
-		if (r) {
-			r.forEach((tile, col) => {
-				if (tile && tile.style && bgPositions[tile.textContent]) {
-					tile.style.backgroundPosition = `${bgPositions[tile.textContent].y}% ${bgPositions[tile.textContent].x}%`;
-				}
-			});
-		}
+		r.forEach((tile, col) => {
+			tile.style.backgroundPosition = `${bgPositions[tile.textContent].y}% ${bgPositions[tile.textContent].x}%`;
+		});
 	});
 };
 
