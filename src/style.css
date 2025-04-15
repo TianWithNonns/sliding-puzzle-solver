@@ -36,59 +36,6 @@
 }
 
 .title {
-
-/* Main title and description styles */
-#main-title-description {
-    text-align: center;
-    padding: 2vh 5vw;
-    max-width: 1200px;
-    margin: 0 auto;
-    margin-bottom: 2vh;
-}
-
-.main-title {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.main-title h1 {
-    font-size: 2.8rem;
-    color: #333;
-    margin-bottom: 1vh;
-    font-weight: 700;
-}
-
-.main-title p {
-    font-size: 1.2rem;
-    color: #666;
-    max-width: 800px;
-    line-height: 1.6;
-}
-
-/* Responsive styles for main title section */
-@media screen and (max-width: 768px) {
-    #main-title-description {
-        padding: 1.5vh 4vw;
-    }
-    
-    .main-title h1 {
-        font-size: 2rem;
-    }
-    
-    .main-title p {
-        font-size: 1rem;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .main-title h1 {
-        font-size: 1.8rem;
-    }
-}
-
-
     font-size: 3.5vh;
     padding-top: 0.5vh;
     text-align: center;
