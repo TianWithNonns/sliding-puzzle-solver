@@ -1,6 +1,86 @@
+/* 主导航样式 */
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1vh 2vw;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: relative;
+    width: 100%;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.nav-logo-img {
+    height: 4vh;
+    margin-right: 0.8vw;
+}
+
 .title {
     font-size: 3.5vh;
-    padding-top: 1vh;
+    padding-top: 0.5vh;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2vw;
+}
+
+.nav-links a {
+    color: #333;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.5vh 1vw;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.nav-links a:hover {
+    background-color: #e9ecef;
+    color: #0051ff;
+}
+
+/* 响应式导航 */
+@media screen and (max-width: 768px) {
+    .main-nav {
+        flex-direction: column;
+        padding: 1vh;
+    }
+    
+    .nav-logo {
+        margin-bottom: 1vh;
+    }
+    
+    .title {
+        position: relative;
+        left: 0;
+        transform: none;
+        font-size: 2.8vh;
+        margin: 1vh 0;
+    }
+    
+    .nav-links {
+        width: 100%;
+        justify-content: center;
+        margin-top: 1vh;
+    }
 }
 
 .editTitle {
@@ -236,13 +316,71 @@ input[type=number]::-webkit-outer-spin-button {
 
 
 /* SEO优化后的页脚样式 */
+/* 内容部分样式 */
+.info-section {
+    padding: 5vh 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.info-section h2 {
+    margin-bottom: 3vh;
+    color: #333;
+    font-size: 2.2rem;
+}
+
+.info-content, .faq-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2vw;
+    margin-top: 3vh;
+}
+
+.info-item, .faq-item {
+    flex: 1;
+    min-width: 250px;
+    max-width: 400px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 2vh 2vw;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    margin-bottom: 2vh;
+}
+
+.info-item h3, .faq-item h3 {
+    color: #0051ff;
+    margin-bottom: 1.5vh;
+    font-size: 1.4rem;
+}
+
+.info-item p, .faq-item p {
+    color: #555;
+    line-height: 1.6;
+}
+
+/* 分隔内容部分与游戏区域 */
+#how-it-works {
+    margin-top: 5vh;
+    border-top: 1px solid #eee;
+    padding-top: 5vh;
+}
+
 footer {
     margin-top: 4vh;
     font-size: 1.8vh;
-    padding: 1vh 0;
+    padding: 2vh 0;
     color: #555;
     width: 100%;
     flex-direction: column;
+    background-color: #f8f9fa;
+    border-top: 1px solid #eee;
 }
 
 footer a {

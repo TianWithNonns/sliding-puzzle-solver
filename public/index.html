@@ -33,7 +33,20 @@
 <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <header>
-        <h1 class="centered title" id="title">Editing Start</h1>
+        <nav class="main-nav">
+            <div class="nav-logo">
+                <a href="#" class="logo">
+                    <img src="logo192.png" alt="Sliding Puzzle Solver Logo" class="nav-logo-img">
+                    <span>Sliding Puzzle Solver</span>
+                </a>
+            </div>
+            <h1 class="centered title" id="title">Editing Start</h1>
+            <div class="nav-links">
+                <a href="#how-it-works">How It Works</a>
+                <a href="#faq">FAQ</a>
+                <a href="#about">About</a>
+            </div>
+        </nav>
     </header>
     <main>
         <section class="puzzle-section">
@@ -165,6 +178,55 @@
             <textarea id="solutionOutput" class="outputArea solutionOutput" readonly aria-label="Solution steps"></textarea>
         </section>
     </main>
+    <!-- 新增的内容部分 -->
+    <section id="how-it-works" class="info-section">
+        <div class="container">
+            <h2>How It Works</h2>
+            <div class="info-content">
+                <div class="info-item">
+                    <h3>1. Customize Your Puzzle</h3>
+                    <p>Set your puzzle dimensions, choose a custom image, and configure the start and goal states of your sliding puzzle.</p>
+                </div>
+                <div class="info-item">
+                    <h3>2. Solve It Yourself</h3>
+                    <p>Challenge yourself by trying to solve the puzzle manually - click or tap tiles to slide them into position.</p>
+                </div>
+                <div class="info-item">
+                    <h3>3. Use Algorithmic Solving</h3>
+                    <p>Let our advanced algorithms find the optimal solution path for you. Choose from multiple solving methods.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="info-section">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-content">
+                <div class="faq-item">
+                    <h3>What is a sliding puzzle?</h3>
+                    <p>A sliding puzzle is a combination puzzle that challenges you to slide pieces along certain routes to establish a certain end-configuration.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What algorithms does this solver use?</h3>
+                    <p>Our solver implements several algorithms including A*, IDA*, BFS, and strategic pattern-based solving methods.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Can I use my own images?</h3>
+                    <p>Yes! You can upload your own image or provide a URL to create a custom sliding puzzle.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="info-section">
+        <div class="container">
+            <h2>About This Project</h2>
+            <p>The Sliding Puzzle Solver is an interactive web application that allows users to create, play with, and automatically solve sliding puzzles of various dimensions. It was developed to demonstrate algorithms and problem-solving techniques in a fun, interactive way.</p>
+            <p>This project showcases multiple path-finding algorithms and offers a customizable experience for puzzle enthusiasts.</p>
+        </div>
+    </section>
+
     <footer class="centered">
         <p>Sliding Puzzle Solver - An interactive puzzle game with various solving algorithms</p>
         <p><a href="https://github.com/jweilhammer/sliding-puzzle-solver" target="_blank" rel="noopener noreferrer">View on GitHub</a></p>
