@@ -3,15 +3,24 @@
 <head>
     <meta charset="utf-8"></meta>
     <link rel="icon" href="favicon.ico"></link>
+    <link rel="preload" href="default.jpg" as="image"></link>
+    <link rel="preload" href="bundle.js" as="script"></link>
+    <link rel="preload" href="style.css" as="style"></link>
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width"></meta>
     <meta name="theme-color" content="#4100a3"></meta>
-    <meta
-      name="description"
-      content="Sliding puzzle solver that supports any sized puzzle, custom images, and every start and goal state."
-    ></meta>
-    <link rel="apple-touch-icon" href="public/logo180.png"></link>
-    <link rel="manifest" href="public/manifest.json"></link>
-    <title>Sliding Puzzle Solver</title>
+    <meta name="description" content="Interactive sliding puzzle solver supporting customizable dimensions, images, and editable start/goal states with multiple solving algorithms."></meta>
+    <meta name="keywords" content="sliding puzzle, puzzle solver, algorithmic puzzle, interactive puzzle, custom puzzle, puzzle game"></meta>
+    <meta name="author" content="JWeilhammer"></meta>
+    <meta name="robots" content="index, follow"></meta>
+    <meta property="og:title" content="Sliding Puzzle Solver"></meta>
+    <meta property="og:description" content="Interactive sliding puzzle solver supporting customizable dimensions, images, and editable start/goal states with multiple solving algorithms."></meta>
+    <meta property="og:type" content="website"></meta>
+    <meta property="og:url" content="https://jweilhammer.github.io/sliding-puzzle-solver/"></meta>
+    <meta property="og:image" content="https://jweilhammer.github.io/sliding-puzzle-solver/logo512.png"></meta>
+    <link rel="canonical" href="https://jweilhammer.github.io/sliding-puzzle-solver/"></link>
+    <link rel="apple-touch-icon" href="logo180.png"></link>
+    <link rel="manifest" href="manifest.json"></link>
+    <title>Sliding Puzzle Solver - Interactive Customizable Puzzle Game</title>
     <!-- 
       For updating css classes dynmically with JS
       Using to update all grid tiles with attributes that can't be inherited from the container
@@ -23,26 +32,31 @@
 
 <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div class="centered title" id="title">Editing Start</div>
-    <div class="centered gridContainer" id="gridContainer">
-        <div id="grid" class="grid"></div>
-    </div>
-    <div id="quickEditButtons" class="centered">
-        <button id="shuffleBtn" class="buttons fontButtons buttonsRow1">Shuffle</button>
-        <button id="resetBtn" class="buttons fontButtons buttonsRow1">Reset</button>
-        <button id="randomizeBtn" class="buttons fontButtons buttonsRow1">Randomize</button>
-    </div>
+    <header>
+        <h1 class="centered title" id="title">Editing Start</h1>
+    </header>
+    <main>
+        <section class="puzzle-section">
+            <div class="centered gridContainer" id="gridContainer">
+                <div id="grid" class="grid" aria-label="Sliding puzzle grid"></div>
+            </div>
+            <nav id="quickEditButtons" class="centered" aria-label="Quick puzzle actions">
+                <button id="shuffleBtn" class="buttons fontButtons buttonsRow1" aria-label="Shuffle puzzle">Shuffle</button>
+                <button id="resetBtn" class="buttons fontButtons buttonsRow1" aria-label="Reset puzzle">Reset</button>
+                <button id="randomizeBtn" class="buttons fontButtons buttonsRow1" aria-label="Randomize puzzle">Randomize</button>
+            </nav>
 
-    <div class="centered">
-        <button id="playBtn" class="buttons fontButtons buttonsRow2">Solve Myself</button>
-        <button id="editStartBtn" class="buttons fontButtons buttonsRow2">Edit Start</button>
-        <button id="editGoalBtn" class="buttons fontButtons buttonsRow2"">Edit Goal</button>
-    </div>
-        <div class="centered">
-            <button id="solveBtn" class="buttons fontButtons buttonsRow3">Solve for me</button>
-            <select class="algorithmsDropdown" name="algorithms" id="algorithmsDropdown">
-            </select>
-    </div>
+            <div class="centered" aria-label="Puzzle mode controls">
+                <button id="playBtn" class="buttons fontButtons buttonsRow2" aria-label="Play mode">Solve Myself</button>
+                <button id="editStartBtn" class="buttons fontButtons buttonsRow2" aria-label="Edit start state">Edit Start</button>
+                <button id="editGoalBtn" class="buttons fontButtons buttonsRow2" aria-label="Edit goal state">Edit Goal</button>
+            </div>
+            <div class="centered" aria-label="Solve controls">
+                <button id="solveBtn" class="buttons fontButtons buttonsRow3" aria-label="Auto-solve puzzle">Solve for me</button>
+                <select class="algorithmsDropdown" name="algorithms" id="algorithmsDropdown" aria-label="Select solving algorithm">
+                </select>
+            </div>
+        </section>
 
     <div id="editInputsContainer" class="editInputsContainer">
         <div>
@@ -146,9 +160,36 @@
             </div>
         </div>
     </div>
-    <div id="outputAreaContainer" class="outputAreaContainer" style="display: none;">
-        <textarea id="summaryOutput" class="outputArea summaryOutput" readonly></textarea>
-        <textarea id="solutionOutput" class="outputArea solutionOutput" readonly></textarea>
-    </div>
+    <section id="outputAreaContainer" class="outputAreaContainer" style="display: none;">
+            <textarea id="summaryOutput" class="outputArea summaryOutput" readonly aria-label="Solution summary"></textarea>
+            <textarea id="solutionOutput" class="outputArea solutionOutput" readonly aria-label="Solution steps"></textarea>
+        </section>
+    </main>
+    <footer class="centered">
+        <p>Sliding Puzzle Solver - An interactive puzzle game with various solving algorithms</p>
+        <p><a href="https://github.com/jweilhammer/sliding-puzzle-solver" target="_blank" rel="noopener noreferrer">View on GitHub</a></p>
+    </footer>
+
+    <!-- 结构化数据用于Google搜索结果增强显示 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Sliding Puzzle Solver",
+        "description": "Interactive sliding puzzle solver supporting customizable dimensions, images, and editable start/goal states with multiple solving algorithms.",
+        "url": "https://jweilhammer.github.io/sliding-puzzle-solver/",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Person",
+            "name": "JWeilhammer"
+        }
+    }
+    </script>
 </body>
 </html>

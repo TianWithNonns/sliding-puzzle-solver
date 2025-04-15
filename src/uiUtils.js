@@ -1,3 +1,29 @@
+
+// 添加一个简单的元素存在性检查助手函数
+export const elementExists = (elementId) => {
+    return document.getElementById(elementId) !== null;
+};
+
+// 安全地为元素添加事件监听器
+export const safeAddEventListener = (elementId, event, callback) => {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.addEventListener(event, callback);
+        return true;
+    }
+    return false;
+};
+
+// 安全地设置元素样式
+export const safeSetStyle = (elementId, propertyName, value) => {
+    const element = document.getElementById(elementId);
+    if (element && element.style) {
+        element.style[propertyName] = value;
+        return true;
+    }
+    return false;
+};
+
 import { Puzzle } from "./Puzzle.js";
 import { state } from "./State.js";
 
