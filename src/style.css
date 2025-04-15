@@ -8,11 +8,16 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     position: relative;
     width: 100%;
+    box-sizing: border-box;
+    flex-wrap: wrap;
 }
 
 .nav-logo {
     display: flex;
     align-items: center;
+    flex: 1;
+    min-width: 200px;
+    white-space: nowrap;
 }
 
 .logo {
@@ -27,19 +32,24 @@
 .nav-logo-img {
     height: 4vh;
     margin-right: 0.8vw;
+    max-height: 30px;
 }
 
 .title {
     font-size: 3.5vh;
     padding-top: 0.5vh;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    text-align: center;
+    flex: 2;
+    white-space: nowrap;
 }
 
 .nav-links {
     display: flex;
-    gap: 2vw;
+    gap: 1.5vw;
+    flex: 1;
+    justify-content: flex-end;
+    min-width: 200px;
+    flex-wrap: nowrap;
 }
 
 .nav-links a {
@@ -47,9 +57,10 @@
     text-decoration: none;
     font-size: 1rem;
     font-weight: 500;
-    padding: 0.5vh 1vw;
+    padding: 0.5vh 0.8vw;
     border-radius: 4px;
     transition: background-color 0.2s;
+    white-space: nowrap;
 }
 
 .nav-links a:hover {
@@ -66,20 +77,36 @@
     
     .nav-logo {
         margin-bottom: 1vh;
+        justify-content: center;
     }
     
     .title {
-        position: relative;
-        left: 0;
-        transform: none;
         font-size: 2.8vh;
         margin: 1vh 0;
+        order: 2;
     }
     
     .nav-links {
         width: 100%;
         justify-content: center;
         margin-top: 1vh;
+        order: 3;
+    }
+}
+
+/* 更小屏幕的优化 */
+@media screen and (max-width: 600px) {
+    .nav-links {
+        gap: 0.8vw;
+    }
+    
+    .nav-links a {
+        padding: 0.4vh 0.6vw;
+        font-size: 0.9rem;
+    }
+    
+    .logo span {
+        font-size: 1rem;
     }
 }
 
