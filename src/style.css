@@ -403,24 +403,118 @@ input[type=number]::-webkit-outer-spin-button {
     padding-top: 5vh;
 }
 
-footer {
-    margin-top: 4vh;
-    font-size: 1.8vh;
-    padding: 2vh 0;
-    color: #555;
+/* 新的页脚样式 */
+.footer {
+    background-color: #1e2630;
+    color: #fff;
+    padding: 4vh 0 2vh;
+    margin-top: 5vh;
     width: 100%;
-    flex-direction: column;
-    background-color: #f8f9fa;
-    border-top: 1px solid #eee;
 }
 
-footer a {
-    color: #0051ff;
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 2vh;
+    padding: 0 15px;
+}
+
+.footer-column h3 {
+    color: #fff;
+    margin-bottom: 1.5vh;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.footer-column p {
+    color: #adb5bd;
+    line-height: 1.6;
+    margin-bottom: 1vh;
+    font-size: 0.9rem;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.8vh;
+}
+
+.footer-links a {
+    color: #adb5bd;
+    text-decoration: none;
+    transition: color 0.2s;
+    font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+    color: #fff;
     text-decoration: none;
 }
 
-footer a:hover {
-    text-decoration: underline;
+.footer-bottom {
+    margin-top: 3vh;
+    padding-top: 2vh;
+    border-top: 1px solid #2c3e50;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2vh 20px 0;
+}
+
+.footer-bottom p {
+    color: #adb5bd;
+    font-size: 0.9rem;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons a {
+    color: #adb5bd;
+    transition: color 0.2s;
+}
+
+.social-icons a:hover {
+    color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+    }
+    
+    .footer-column {
+        margin-bottom: 3vh;
+        min-width: 100%;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 2vh;
+    }
+    
+    .social-icons {
+        justify-content: center;
+    }
 }
 
 /* 结构化布局 */
