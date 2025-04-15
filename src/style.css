@@ -219,52 +219,62 @@
 }
 
 .buttons {
-    margin:min(1vh, 1.5vw) min(1vh, 1.5vw) min(1vh, 1.5vw) min(1vh, 1.5vw);
-
-    border-radius:0.30em;
+    margin: min(1vh, 1.5vw);
+    border-radius: 0.5em;
     box-sizing: border-box;
-    text-align:center;
-    position:relative;
+    text-align: center;
+    position: relative;
     cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
 }
 
 .fontButtons {
-    font-size: max(2.5vh, 1vw);
-    padding: min(0.4vh, 1vw);
-    color: black;
+    font-size: max(2.2vh, 1vw);
+    padding: 0.6em 1em;
+    color: #333;
+    font-weight: 500;
+    letter-spacing: 0.02em;
 }
 
 .svgButtons {
-    padding: 0; 
+    padding: 0.5em; 
     width: max(3.8vh, 1vw);
     height: max(3.8vh, 1vw);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.buttons:active{
-    top:0.1em;
+.buttons:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-.buttons:hover{
-    opacity: 0.9;
-    box-shadow: 0 0 8px black;
+.buttons:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.buttons:focus{
-    opacity: 0.9;
-    box-shadow: 0 0 8px black;
+.buttons:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 81, 255, 0.3), 0 2px 5px rgba(0, 0, 0, 0.15);
 }
-
 
 .buttonsRow1 {
-    background-color:#EAECEE;
+    background-color: #f8f9fa;
+    color: #333;
 }
 
 .buttonsRow2 {
-    background-color:#D5D8DC;
+    background-color: #e9ecef;
+    color: #333;
 }
 
 .buttonsRow3 {
-    background-color:#ABB2B9;
+    background-color: #0051ff;
+    color: white;
 }
 
 .algorithmsDropdown {
