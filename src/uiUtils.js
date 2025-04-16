@@ -1,27 +1,26 @@
-
 // 添加一个简单的元素存在性检查助手函数
 export const elementExists = (elementId) => {
-    return document.getElementById(elementId) !== null;
+	return document.getElementById(elementId) !== null;
 };
 
 // 安全地为元素添加事件监听器
 export const safeAddEventListener = (elementId, event, callback) => {
-    const element = document.getElementById(elementId);
-    if (element) {
-        element.addEventListener(event, callback);
-        return true;
-    }
-    return false;
+	const element = document.getElementById(elementId);
+	if (element) {
+		element.addEventListener(event, callback);
+		return true;
+	}
+	return false;
 };
 
 // 安全地设置元素样式
 export const safeSetStyle = (elementId, propertyName, value) => {
-    const element = document.getElementById(elementId);
-    if (element && element.style) {
-        element.style[propertyName] = value;
-        return true;
-    }
-    return false;
+	const element = document.getElementById(elementId);
+	if (element && element.style) {
+		element.style[propertyName] = value;
+		return true;
+	}
+	return false;
 };
 
 import { Puzzle } from "./Puzzle.js";
@@ -32,10 +31,10 @@ import "./style.css";
 
 // Output public assets into dist via Webpack
 import Background from "../public/default.jpg";
-import Icon180Px from '../public/logo180.png';
-import Icon192Px from '../public/logo192.png';
-import Icon512Px from '../public/logo512.png';
-import IconManifest from '../public/manifest.json';
+import Icon180Px from "../public/logo180.png";
+import Icon192Px from "../public/logo192.png";
+import Icon512Px from "../public/logo512.png";
+import IconManifest from "../public/manifest.json";
 
 // Custom inputs
 const rowInput = document.getElementById("rowInput");
@@ -44,7 +43,7 @@ const playButton = document.getElementById("playBtn");
 const rowSlider = document.getElementById("rowSlider");
 const colSlider = document.getElementById("colSlider");
 const editGoalBtn = document.getElementById("editGoalBtn");
-const editStartBtn = document.getElementById('editStartBtn');
+const editStartBtn = document.getElementById("editStartBtn");
 const imageInputURL = document.getElementById("imageInputURL");
 const imageUploadInput = document.getElementById("imageUploadInput");
 const quickEditButtons = document.getElementById("quickEditButtons");
@@ -105,12 +104,21 @@ const shufflePuzzle = () => {
 	values.push(0);
 
 	let puzzle_arr = [];
-    const goalSolvability = Puzzle.isPuzzleSolvable2Darr(state.goalPuzzle.matrix);
+	const goalSolvability = Puzzle.isPuzzleSolvable2Darr(state.goalPuzzle.matrix);
 	do {
 		puzzle_arr = Puzzle.shuffleArray(values);
-	} while (Puzzle.isPuzzleSolvable1Darr(puzzle_arr, state.puzzleRows, state.puzzleCols) !== goalSolvability);
+	} while (
+		Puzzle.isPuzzleSolvable1Darr(
+			puzzle_arr,
+			state.puzzleRows,
+			state.puzzleCols,
+		) !== goalSolvability
+	);
 
-	const bgPositions = getBackgroundPositions(state.puzzleRows, state.puzzleCols);
+	const bgPositions = getBackgroundPositions(
+		state.puzzleRows,
+		state.puzzleCols,
+	);
 	for (let row = 0; row < state.puzzleRows; row++) {
 		for (let col = 0; col < state.puzzleCols; col++) {
 			let value = puzzle_arr.shift();
@@ -141,8 +149,16 @@ const getBackgroundPositions = (rows, cols) => {
 		for (let col = 0; col < cols; col++) {
 			value = value === rows * cols ? "" : value;
 			positionsPercentages[value] = {
-				x: rowPercentStep * (state.backgroundVerticallyFlipped ? state.puzzleRows - 1 - row : row),
-				y: colPercentStep * (state.backgroundHorizontallyFlipped ? state.puzzleCols - 1 - col : col),
+				x:
+					rowPercentStep *
+					(state.backgroundVerticallyFlipped
+						? state.puzzleRows - 1 - row
+						: row),
+				y:
+					colPercentStep *
+					(state.backgroundHorizontallyFlipped
+						? state.puzzleCols - 1 - col
+						: col),
 			};
 
 			value++;
@@ -175,25 +191,50 @@ const getPuzzleFromGrid = () => {
 const initializeUiElements = () => {
 	initializeDropdownAlgorithms();
 
-    // Button onclick event listeners
+	// Button onclick event listeners
 	document.getElementById("resetBtn").addEventListener("click", resetPuzzle);
-	document.getElementById("shuffleBtn").addEventListener("click", shufflePuzzle);
-	document.getElementById("randomizeBtn").addEventListener("click", randomizePuzzle);
-	document.getElementById("rotatePuzzleBtn").addEventListener("click", rotatePuzzle);
-	document.getElementById("imageInputURL").addEventListener("change", handleImageURL);
-	document.getElementById("toggleBordersBtn").addEventListener("click", toggleBorders);
-	document.getElementById("toggleNumbersBtn").addEventListener("click", toggleNumbers);
-	document.getElementById("imageUploadInput").addEventListener("change", handleImageUpload);
-	document.getElementById("flipPuzzleVerticalBtn").addEventListener("click", flipPuzzleVertically);
-	document.getElementById("flipImageVerticalBtn").addEventListener("click", flipBackgroundVertically);
-	document.getElementById("flipPuzzleHorizontalBtn").addEventListener("click", flipPuzzleHorizontally);
-	document.getElementById("flipImageHorizontalBtn").addEventListener("click", flipBackgroundHorizontally);
+	document
+		.getElementById("shuffleBtn")
+		.addEventListener("click", shufflePuzzle);
+	document
+		.getElementById("randomizeBtn")
+		.addEventListener("click", randomizePuzzle);
+	document
+		.getElementById("rotatePuzzleBtn")
+		.addEventListener("click", rotatePuzzle);
+	document
+		.getElementById("imageInputURL")
+		.addEventListener("change", handleImageURL);
+	document
+		.getElementById("toggleBordersBtn")
+		.addEventListener("click", toggleBorders);
+	document
+		.getElementById("toggleNumbersBtn")
+		.addEventListener("click", toggleNumbers);
+	document
+		.getElementById("imageUploadInput")
+		.addEventListener("change", handleImageUpload);
+	document
+		.getElementById("flipPuzzleVerticalBtn")
+		.addEventListener("click", flipPuzzleVertically);
+	document
+		.getElementById("flipImageVerticalBtn")
+		.addEventListener("click", flipBackgroundVertically);
+	document
+		.getElementById("flipPuzzleHorizontalBtn")
+		.addEventListener("click", flipPuzzleHorizontally);
+	document
+		.getElementById("flipImageHorizontalBtn")
+		.addEventListener("click", flipBackgroundHorizontally);
 	document.getElementById("editGoalBtn").addEventListener("click", () => {
 		enableGoalEditMode();
 	});
-	playButton.addEventListener("click", () => { enablePlayMode() });
-	editStartBtn.addEventListener("click", () => { enableStartEditMode() });
-
+	playButton.addEventListener("click", () => {
+		enablePlayMode();
+	});
+	editStartBtn.addEventListener("click", () => {
+		enableStartEditMode();
+	});
 
 	// Keep puzzle the same dimensions as our row/col inputs
 	rowSlider.addEventListener("change", (e) => {
@@ -220,10 +261,9 @@ const initializeUiElements = () => {
 		updateBackgroundImageSize();
 	});
 
-
 	// Prevent zooming when double tapping buttons on mobile
 	for (const button of document.getElementsByTagName("button")) {
-		button.addEventListener('touchend', function(e) {
+		button.addEventListener("touchend", function (e) {
 			e.preventDefault();
 			try {
 				this.focus();
@@ -249,14 +289,13 @@ const initializeUiElements = () => {
 	// Make goal puzzle a default goal state with current size
 	state.goalPuzzle = new Puzzle(state.puzzleRows, state.puzzleCols, false);
 
-    // Workaround for keeping the background image the correct size on window resizes
-    // Do not have <img> tags that have abosulute positions updated.  Update the CSS class instead and let it handle it
-    window.addEventListener("resize", (event) => {
-        updateBackgroundImageSize();
-        resetBackgroundPositions();
-    });
+	// Workaround for keeping the background image the correct size on window resizes
+	// Do not have <img> tags that have abosulute positions updated.  Update the CSS class instead and let it handle it
+	window.addEventListener("resize", (event) => {
+		updateBackgroundImageSize();
+		resetBackgroundPositions();
+	});
 };
-
 
 // Swap two tile elements' attributes on the puzzle grid
 const swapGridTiles = (tile1, tile2) => {
@@ -269,7 +308,6 @@ const swapGridTiles = (tile1, tile2) => {
 	tile1.style.opacity = isNaN(parseInt(tile1.textContent)) ? "0" : "1";
 	tile2.style.opacity = isNaN(parseInt(tile2.textContent)) ? "0" : "1";
 };
-
 
 // When play mode set, the user can't edit the puzzle freely
 // This lets them play the puzzle by the normal rules:
@@ -284,8 +322,10 @@ const enablePlayMode = () => {
 	const goalSolvability = Puzzle.isPuzzleSolvable2Darr(state.goalPuzzle.matrix);
 	const puzzleSolvability = Puzzle.isPuzzleSolvable2Darr(startingPuzzle.matrix);
 	if (puzzleSolvability !== goalSolvability) {
-		let errorMessage = "Puzzle is not solvable with current goal state!\n\nWould you like to auto-fix it?\n\n";
-		errorMessage += "(Auto-fix will swap two adjacent non-blank tiles on the bottom right)";
+		let errorMessage =
+			"Puzzle is not solvable with current goal state!\n\nWould you like to auto-fix it?\n\n";
+		errorMessage +=
+			"(Auto-fix will swap two adjacent non-blank tiles on the bottom right)";
 
 		let answer = confirm(errorMessage);
 		if (answer) {
@@ -294,7 +334,6 @@ const enablePlayMode = () => {
 	}
 
 	state.playMode = true;
-	title.style.visibility = null;
 	title.textContent = "Slide Blank to Solve";
 	disableGridTileDragging();
 	playModeSetMovableTiles();
@@ -303,16 +342,14 @@ const enablePlayMode = () => {
 	hideOutputTextAreas();
 };
 
-
 const disablePlayMode = () => {
-	title.style.visibility = null;
 	state.playMode = false;
-	resetClickSourceTile()
+	resetClickSourceTile();
 	enableGridTileDragging();
 	showEditElements();
 	showQuickEditButtons();
 	hideOutputTextAreas();
-}
+};
 
 const enableStartEditMode = () => {
 	state.solveAnimation.active = false;
@@ -320,19 +357,17 @@ const enableStartEditMode = () => {
 	disableGoalEditMode();
 	disablePlayMode();
 	title.textContent = "Editing Start";
-}
+};
 
 const enableGoalEditMode = () => {
 	state.solveAnimation.active = false;
 	if (!state.editingGoalPuzzle) {
 		disablePlayMode();
 
-
 		state.editingGoalPuzzle = true;
 		state.startingPuzzle = getPuzzleFromGrid();
 		updatePuzzleState(state.goalPuzzle.matrix);
 		title.textContent = "Editing Goal";
-		title.style.visibility = null;
 	}
 };
 
@@ -343,7 +378,10 @@ const disableGoalEditMode = () => {
 		state.editingGoalPuzzle = false;
 		state.goalPuzzle = getPuzzleFromGrid();
 
-		if (state.puzzleRows === state.startingPuzzle.rows && state.puzzleCols === state.startingPuzzle.cols) {
+		if (
+			state.puzzleRows === state.startingPuzzle.rows &&
+			state.puzzleCols === state.startingPuzzle.cols
+		) {
 			updatePuzzleState(state.startingPuzzle.matrix);
 		} else {
 			state.startingPuzzle = null;
@@ -351,10 +389,9 @@ const disableGoalEditMode = () => {
 		}
 
 		editGoalBtn.textContent = "Edit Goal";
-		title.textContent = "Editing Start";
-		title.style.visibility = null;
+		title.textContent = "Sliding Puzzle";
 	}
-}
+};
 
 // Hide/show the edit start controls by changing container's display style
 const hideEditElements = () => {
@@ -366,13 +403,12 @@ const showEditElements = () => {
 };
 
 const hideQuickEditButtons = () => {
-	quickEditButtons.style.visibility = 'hidden';
-}
+	quickEditButtons.style.visibility = "hidden";
+};
 
 const showQuickEditButtons = () => {
 	quickEditButtons.style.visibility = null;
-}
-
+};
 
 // Set things up for play mode, where user can't drag any tiles
 const disableGridTileDragging = () => {
@@ -395,7 +431,7 @@ const enableGridTileDragging = () => {
 			tile.style.opacity = isNaN(parseInt(tile.textContent)) ? "0" : "1";
 		}
 	}
-}
+};
 
 // Set only neighbors of blank space to be clickable so user can slide the puzzle normally
 const playModeSetMovableTiles = () => {
@@ -527,7 +563,10 @@ const updatePuzzleDimensions = (newRow, newCol) => {
 	// Reset our tile background positions and number overlays/ids
 	// Add new tiles in if needed
 	let value = 1;
-	const bgPositions = getBackgroundPositions(state.puzzleRows, state.puzzleCols);
+	const bgPositions = getBackgroundPositions(
+		state.puzzleRows,
+		state.puzzleCols,
+	);
 	for (let row = 0; row < newRow; row++) {
 		for (let col = 0; col < newCol; col++) {
 			const tileNum = value === newCol * newRow ? "" : value; // Last tile is blank
@@ -574,12 +613,12 @@ const searchAlgorithmOptions = [];
 let strategicAlgorithmOption = null;
 const initializeDropdownAlgorithms = () => {
 	const algorithms = {
-		"Strategic": "Strategically",
+		Strategic: "Strategically",
 		"IDA*": "IDA*",
 		"A*": "A*",
 		"A*closedSet": "A* (closed set)",
-		"BFS": "BFS",
-	}
+		BFS: "BFS",
+	};
 
 	for (const [value, text] of Object.entries(algorithms)) {
 		const option = document.createElement("option");
@@ -593,7 +632,7 @@ const initializeDropdownAlgorithms = () => {
 			searchAlgorithmOptions.push(option);
 		}
 	}
-}
+};
 
 // Reset algorithm dropdown to either be only strategic, or to include all the algorithms
 const resetAlgorithmDropdown = (strategicOnly) => {
@@ -623,7 +662,8 @@ const updateBackgroundImageSize = () => {
 		if (showNumbers)
 			// Magic formula that will keep number font looking nice and prevent grid from getting out of bounds
 			grid.style.fontSize = `${
-				(800 * (0.001 * gridContainer.offsetWidth)) / (2 * Math.max(state.puzzleCols, state.puzzleRows))
+				(800 * (0.001 * gridContainer.offsetWidth)) /
+				(2 * Math.max(state.puzzleCols, state.puzzleRows))
 			}px`;
 	}
 };
@@ -634,19 +674,16 @@ function handleImageURL() {
 	backgroundCss.innerHTML = `.grid-item::before { background-image: url('${imageInputURL.value}'); }`;
 }
 
-
 // Handle local image upload, resize to low-ish resolution to handle huge 8k images, etc
 const handleImageUpload = () => {
 	const file = imageUploadInput.files[0];
 	if (file && file["type"].split("/")[0] === "image") {
-
-        // Set dummy img element to have our temp image as source
+		// Set dummy img element to have our temp image as source
 		const tempImageUrl = URL.createObjectURL(file);
 		const img = new Image();
 		img.src = tempImageUrl;
 
 		img.onload = function (imgElement) {
-
 			// Use tmp canvas to resize to 500 px wide, scale height at the same rate
 			const resizedWidth = 500;
 			const canvas = document.createElement("canvas");
@@ -671,7 +708,6 @@ const handleImageUpload = () => {
 	}
 };
 
-
 // Hide/show outputs for our solution summary and move list
 const hideOutputTextAreas = () => {
 	outputAreaContainer.style.display = "none";
@@ -689,7 +725,10 @@ const resetPuzzle = () => {
 		enableStartEditMode();
 	}
 
-	const bgPositions = getBackgroundPositions(state.puzzleRows, state.puzzleCols);
+	const bgPositions = getBackgroundPositions(
+		state.puzzleRows,
+		state.puzzleCols,
+	);
 	for (let row = 0; row < state.puzzleRows; row++) {
 		for (let col = 0; col < state.puzzleCols; col++) {
 			const tile = state.grid[row][col];
@@ -704,21 +743,26 @@ const resetPuzzle = () => {
 		}
 	}
 
-    if (!Puzzle.isPuzzleSolvable2Darr(state.goalPuzzle.matrix)) {
-        autoFixPuzzle();
-    }
+	if (!Puzzle.isPuzzleSolvable2Darr(state.goalPuzzle.matrix)) {
+		autoFixPuzzle();
+	}
 };
 
 // Resets current puzzle to match a new matrix state
 // Mostly for switching in between start and goal states
 const updatePuzzleState = (matrix) => {
 	state.solveAnimation.active = false;
-	if (matrix.length !== state.puzzleRows || matrix[0].length !== state.puzzleCols) {
+	if (
+		matrix.length !== state.puzzleRows ||
+		matrix[0].length !== state.puzzleCols
+	) {
 		resetPuzzle();
 	} else {
 		state.grid.forEach((row, rowIndex) => {
 			row.forEach((tile, colIndex) => {
-				const tileNum = matrix[rowIndex][colIndex] ? matrix[rowIndex][colIndex] : "";
+				const tileNum = matrix[rowIndex][colIndex]
+					? matrix[rowIndex][colIndex]
+					: "";
 				tile.draggable = true;
 				tile.textContent = tileNum;
 				tile.style.opacity = tileNum ? "1" : "0";
@@ -742,7 +786,6 @@ const randomizePuzzle = () => {
 		state.goalPuzzle = new Puzzle(state.puzzleRows, state.puzzleCols, false);
 	}
 
-
 	// Random puzzle size (2-25)
 	const newRow = Math.floor(Math.random() * 24) + 2;
 	const newCol = Math.floor(Math.random() * 24) + 2;
@@ -755,7 +798,7 @@ const randomizePuzzle = () => {
 	for (let row = 0; row < newRow; row++) {
 		for (let col = 0; col < newCol; col++) {
 			let num = row * newCol + col + 1;
-			num = num === newRow*newCol ? 0 : num;
+			num = num === newRow * newCol ? 0 : num;
 			tempMatrix[row][col] = num;
 		}
 	}
@@ -767,15 +810,20 @@ const randomizePuzzle = () => {
 	do {
 		// 10% chance to just shuffle puzzle, will always be solvable
 		if (Math.random() < 0.1) {
-			const shufflePuzzle = new Puzzle(tempMatrix.length, tempMatrix[0].length, true);
+			const shufflePuzzle = new Puzzle(
+				tempMatrix.length,
+				tempMatrix[0].length,
+				true,
+			);
 			tempMatrix = shufflePuzzle.matrix;
 		} else {
 			// Horizontal flip
-			if (Math.random() < 0.5 ) {
+			if (Math.random() < 0.5) {
 				for (let row = 0; row < tempMatrix.length; row++) {
 					for (let col = 0; col < tempMatrix[0].length / 2; col++) {
 						const tmp = tempMatrix[row][col];
-						tempMatrix[row][col] = tempMatrix[row][tempMatrix[0].length - 1 - col];
+						tempMatrix[row][col] =
+							tempMatrix[row][tempMatrix[0].length - 1 - col];
 						tempMatrix[row][tempMatrix[0].length - 1 - col] = tmp;
 					}
 				}
@@ -794,14 +842,14 @@ const randomizePuzzle = () => {
 
 			// Clockwise rotation
 			if (Math.random() < 0.7) {
-
 				// Make puzzle that is inversed dimensions [col][row]
 				const rotatedMatrix = Array(tempMatrix[0].length)
-				.fill()
-				.map(() => Array(tempMatrix.length));
+					.fill()
+					.map(() => Array(tempMatrix.length));
 				for (let row = 0; row < tempMatrix.length; row++) {
 					for (let col = 0; col < tempMatrix[0].length; col++) {
-						rotatedMatrix[col][tempMatrix.length - 1 - row] = tempMatrix[row][col];
+						rotatedMatrix[col][tempMatrix.length - 1 - row] =
+							tempMatrix[row][col];
 					}
 				}
 
@@ -809,13 +857,16 @@ const randomizePuzzle = () => {
 
 				// Reset temp goal to the new size
 				if (tempMatrix.length !== tempMatrix[0].length) {
-					tempGoal = new Puzzle(tempMatrix.length,  tempMatrix[0].length, false);
+					tempGoal = new Puzzle(tempMatrix.length, tempMatrix[0].length, false);
 				}
 			}
 		}
 
 		randomizedPuzzle.matrix = tempMatrix;
-	} while (!Puzzle.isPuzzleSolvable2Darr(tempMatrix) || tempGoal.isEqualToPuzzle(randomizedPuzzle));
+	} while (
+		!Puzzle.isPuzzleSolvable2Darr(tempMatrix) ||
+		tempGoal.isEqualToPuzzle(randomizedPuzzle)
+	);
 
 	if (Math.random() < 0.5) toggleBorders();
 	if (Math.random() < 0.5) toggleNumbers();
@@ -824,13 +875,15 @@ const randomizePuzzle = () => {
 	updatePuzzleState(tempMatrix);
 };
 
-
 // Flips the puzzle grid tiles horizontally, inverts on x axists
 const flipPuzzleHorizontally = () => {
 	state.solveAnimation.active = false;
 	for (let row = 0; row < state.puzzleRows; row++) {
 		for (let col = 0; col < state.puzzleCols / 2; col++) {
-			swapGridTiles(state.grid[row][col], state.grid[row][state.puzzleCols - 1 - col]);
+			swapGridTiles(
+				state.grid[row][col],
+				state.grid[row][state.puzzleCols - 1 - col],
+			);
 		}
 	}
 };
@@ -840,11 +893,13 @@ const flipPuzzleVertically = () => {
 	state.solveAnimation.active = false;
 	for (let row = 0; row < state.puzzleRows / 2; row++) {
 		for (let col = 0; col < state.puzzleCols; col++) {
-			swapGridTiles(state.grid[row][col], state.grid[state.puzzleRows - 1 - row][col]);
+			swapGridTiles(
+				state.grid[row][col],
+				state.grid[state.puzzleRows - 1 - row][col],
+			);
 		}
 	}
 };
-
 
 // Toggles to flip the background image itself via CSS
 // Does not affect tile/number order on the puzzle grid
@@ -868,7 +923,10 @@ const flipBackground = () => {
 };
 
 const resetBackgroundPositions = () => {
-	const bgPositions = getBackgroundPositions(state.puzzleRows, state.puzzleCols);
+	const bgPositions = getBackgroundPositions(
+		state.puzzleRows,
+		state.puzzleCols,
+	);
 	state.grid.forEach((r, row) => {
 		r.forEach((tile, col) => {
 			tile.style.backgroundPosition = `${bgPositions[tile.textContent].y}% ${bgPositions[tile.textContent].x}%`;
@@ -922,7 +980,8 @@ const toggleBorders = () => {
 	if (borderCss.innerHTML === "") {
 		// Fixes issues when flipping image and background somehow gets 1px smaller
 		borderCss.innerHTML = ".grid-item::before { padding: 1px; }";
-		borderCss.innerHTML += ".grid-item { border: 1px solid black; padding: 1px }";
+		borderCss.innerHTML +=
+			".grid-item { border: 1px solid black; padding: 1px }";
 
 		hideBorderSvg.style.display = null;
 		showBorderSvg.style.display = "none";
@@ -948,8 +1007,6 @@ const toggleNumbers = () => {
 	}
 };
 
-
-
 // Swaps the two most bottom right non-blank tiles with each other (left/right)
 // This inverses the solvability of the puzzle to make things solvable or "unsolvable"
 // Allows for user to not have to think about fixing the puzzle after rotating/flipping/etc
@@ -957,7 +1014,10 @@ const autoFixPuzzle = () => {
 	for (let row = state.puzzleRows - 1; row >= 0; row--) {
 		for (let col = state.puzzleCols - 1; col >= 0; col--) {
 			if (col - 1 >= 0) {
-				if (state.grid[row][col].textContent && state.grid[row][col - 1].textContent) {
+				if (
+					state.grid[row][col].textContent &&
+					state.grid[row][col - 1].textContent
+				) {
 					swapGridTiles(state.grid[row][col], state.grid[row][col - 1]);
 					return;
 				}
@@ -970,7 +1030,6 @@ const animateMoveList = async (startingPuzzle, moveList) => {
 	// Show output area before starting animation
 	showOutputTextAreas();
 	showQuickEditButtons();
-	title.style.visibility = "hidden";
 
 	let blankRow = startingPuzzle.blankRow;
 	let blankCol = startingPuzzle.blankCol;
@@ -979,7 +1038,6 @@ const animateMoveList = async (startingPuzzle, moveList) => {
 	// Apparently 4ms will run slightly faster than 0 since the min timeout is 4ms by default
 	let moveDelayMs = Math.max(1800 / (state.puzzleRows * state.puzzleCols), 4);
 	for (const move of moveList) {
-		
 		// If animation is killed mid-way through (reset, shuffle, etc), stop animating and release lock
 		if (!state.solveAnimation.active) {
 			state.solveAnimation.lock.release();
@@ -987,16 +1045,28 @@ const animateMoveList = async (startingPuzzle, moveList) => {
 		}
 
 		if (move === "RIGHT") {
-			swapGridTiles(state.grid[blankRow][blankCol], state.grid[blankRow][blankCol + 1]);
+			swapGridTiles(
+				state.grid[blankRow][blankCol],
+				state.grid[blankRow][blankCol + 1],
+			);
 			blankCol++;
 		} else if (move === "LEFT") {
-			swapGridTiles(state.grid[blankRow][blankCol], state.grid[blankRow][blankCol - 1]);
+			swapGridTiles(
+				state.grid[blankRow][blankCol],
+				state.grid[blankRow][blankCol - 1],
+			);
 			blankCol--;
 		} else if (move === "UP") {
-			swapGridTiles(state.grid[blankRow][blankCol], state.grid[blankRow - 1][blankCol]);
+			swapGridTiles(
+				state.grid[blankRow][blankCol],
+				state.grid[blankRow - 1][blankCol],
+			);
 			blankRow--;
 		} else if (move === "DOWN") {
-			swapGridTiles(state.grid[blankRow][blankCol], state.grid[blankRow + 1][blankCol]);
+			swapGridTiles(
+				state.grid[blankRow][blankCol],
+				state.grid[blankRow + 1][blankCol],
+			);
 			blankRow++;
 		}
 
@@ -1016,12 +1086,17 @@ const animateMoveList = async (startingPuzzle, moveList) => {
 const checkPuzzleBeforeAnimating = () => {
 	// Set state back to starting puzzle if looking at goal
 	showQuickEditButtons();
-	disableGoalEditMode()
+	disableGoalEditMode();
 
 	let startingPuzzle = getPuzzleFromGrid();
-	if (Puzzle.isPuzzleSolvable2Darr(startingPuzzle.matrix) !== Puzzle.isPuzzleSolvable2Darr(state.goalPuzzle.matrix)) {
-		let errorMessage = "Puzzle is not solvable with current goal state!\n\nWould you like to auto-fix it?\n\n";
-		errorMessage += "(Auto-fix will swap two adjacent non-blank tiles on the bottom right)";
+	if (
+		Puzzle.isPuzzleSolvable2Darr(startingPuzzle.matrix) !==
+		Puzzle.isPuzzleSolvable2Darr(state.goalPuzzle.matrix)
+	) {
+		let errorMessage =
+			"Puzzle is not solvable with current goal state!\n\nWould you like to auto-fix it?\n\n";
+		errorMessage +=
+			"(Auto-fix will swap two adjacent non-blank tiles on the bottom right)";
 
 		let answer = confirm(errorMessage);
 		if (answer) {
@@ -1102,9 +1177,13 @@ function handleTileDrop(e) {
 
 	if (state.dragSourceTile !== this) {
 		// Swap dragged tiles
-		const temp = { text: this.textContent, bgPosition: this.style.backgroundPosition };
+		const temp = {
+			text: this.textContent,
+			bgPosition: this.style.backgroundPosition,
+		};
 		this.textContent = state.dragSourceTile.textContent;
-		this.style.backgroundPosition = state.dragSourceTile.style.backgroundPosition;
+		this.style.backgroundPosition =
+			state.dragSourceTile.style.backgroundPosition;
 		state.dragSourceTile.textContent = temp.text;
 		state.dragSourceTile.style.backgroundPosition = temp.bgPosition;
 
@@ -1157,15 +1236,24 @@ function handleTileTouchAndCLick(e) {
 				for (let col = 0; col < state.grid[row].length; col++) {
 					// Make neighbors of blank space clickable if they're in bounds
 					if (this === state.grid[row][col]) {
-						if (row - 1 >= 0 && isNaN(parseInt(state.grid[row - 1][col].textContent))) {
+						if (
+							row - 1 >= 0 &&
+							isNaN(parseInt(state.grid[row - 1][col].textContent))
+						) {
 							swapGridTiles(state.grid[row - 1][col], this);
 						}
 
-						if (row + 1 <= state.grid.length - 1 && isNaN(parseInt(state.grid[row + 1][col].textContent))) {
+						if (
+							row + 1 <= state.grid.length - 1 &&
+							isNaN(parseInt(state.grid[row + 1][col].textContent))
+						) {
 							swapGridTiles(state.grid[row + 1][col], this);
 						}
 
-						if (col - 1 >= 0 && isNaN(parseInt(state.grid[row][col - 1].textContent))) {
+						if (
+							col - 1 >= 0 &&
+							isNaN(parseInt(state.grid[row][col - 1].textContent))
+						) {
 							swapGridTiles(state.grid[row][col - 1], this);
 						}
 
@@ -1188,6 +1276,5 @@ function handleTileTouchAndCLick(e) {
 		}
 	}
 }
-
 
 export { animateMoveList, checkPuzzleBeforeAnimating, initializeUiElements };
