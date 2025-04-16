@@ -723,6 +723,8 @@ const resetPuzzle = () => {
 
 	if (!state.editingGoalPuzzle) {
 		enableStartEditMode();
+		// 重置后将标题改回"Sliding Puzzle"
+		title.textContent = "Sliding Puzzle";
 	}
 
 	const bgPositions = getBackgroundPositions(
