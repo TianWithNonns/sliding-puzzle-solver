@@ -1,187 +1,51 @@
-/* 主导航样式 */
-.main-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1vh 2vw;
-    background-color: #f8f9fa;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    position: relative;
-    width: 100%;
+:root {
+    --primary-color: #2d4059;
+    --secondary-color: #ea5455;
+    --tertiary-color: #decdc3;
+    --dark-color: #222831;
+    --light-color: #f5f5f5;
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --border-radius: 12px;
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    flex-wrap: wrap;
 }
 
-.nav-logo {
-    display: flex;
-    align-items: center;
-    flex: 1;
-    min-width: 200px;
-    white-space: nowrap;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-
-.nav-logo-img {
-    height: 4vh;
-    margin-right: 0.8vw;
-    max-height: 30px;
-}
-
-.title {
-    font-size: 3.5vh;
-    padding-top: 0.5vh;
-    text-align: center;
-    flex: 2;
-    white-space: nowrap;
-}
-
-.nav-links {
-    display: flex;
-    gap: 1.5vw;
-    flex: 1;
-    justify-content: flex-end;
-    min-width: 200px;
-    flex-wrap: nowrap;
-}
-
-.nav-links a {
-    color: #333;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 500;
-    padding: 0.5vh 0.8vw;
-    border-radius: 4px;
-    transition: background-color 0.2s;
-    white-space: nowrap;
-}
-
-.nav-links a:hover {
-    background-color: #e9ecef;
-    color: #0051ff;
-}
-
-/* 响应式导航 */
-@media screen and (max-width: 768px) {
-    .main-nav {
-        flex-direction: column;
-        padding: 1vh;
-    }
-    
-    .nav-logo {
-        margin-bottom: 1vh;
-        justify-content: center;
-    }
-    
-    .title {
-        font-size: 2.8vh;
-        margin: 1vh 0;
-        order: 2;
-    }
-    
-    .nav-links {
-        width: 100%;
-        justify-content: center;
-        margin-top: 1vh;
-        order: 3;
-    }
-}
-
-/* 更小屏幕的优化 */
-@media screen and (max-width: 600px) {
-    .nav-links {
-        gap: 0.8vw;
-    }
-    
-    .nav-links a {
-        padding: 0.4vh 0.6vw;
-        font-size: 0.9rem;
-    }
-    
-    .logo span {
-        font-size: 1rem;
-    }
-}
-
-.editTitle {
-    font-size: 3vh;
-    flex-basis: 100%;
-}
-
-.gridContainer {
-    /* Keep puzzle centered */
-    margin: 0 auto 0 auto; 
-    padding: 0 0 0 0;
-    height: calc(50vh - 10vw);
-    width: calc(50vh - 10vw);
-    margin-top: 1vh;
-    min-width: 35vh;
-    min-height: 35vh;
-    max-height: 40vw;
-    max-width: 40vw;
-}
-
-.grid {
-    display: grid;
-    grid-auto-columns: 1fr;
-    grid-auto-rows: 1fr;
-    flex: auto;
-
-    /* Replaces aspect ratio to keep all tiles the same height */
+html {
     height: 100%;
-}
-
-.grid-item {
-    margin: 0 0 0 0;
-    padding: 0 0 0 0;
-    flex: auto;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-
-    /* Make background same size as the grid container, and don't repeat the image */
-    background-size: inherit;
-
-    /* Captures pseudo element background */
-    position: relative;
-
-    /* Make numbers not hightlightable/selectable in all browsers
-        Makes the play mode feel lots more natural if user decides to drag cursor
-        Also includes an 'unselectable=on' attribute set via js
-    */
-    -moz-user-select: -moz-none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-
-/* Pseudo element that displays our background image
-    Can be rotated without the main tile being rotated as well 
-*/
-.grid-item::before {
-    /* Display background as same size as tile */
-    content: "";
-    position: absolute;
     width: 100%;
-    height: 100%;
-    z-index: -1;
-    background-position: inherit;
-    background-size: inherit;
+    overflow-x: hidden;
+}
 
-    /* Don't repeat backgrounds to save space on large images
-        TODO: use canvas instead?
-    */
-    background-repeat: no-repeat;
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    line-height: 1.6;
+    margin: 0;
+    min-height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* Layout and Container */
+.app-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 30px 0;
 }
 
 .centered {
@@ -194,53 +58,254 @@
     margin-right: auto;
 }
 
-.break {
-    flex-basis: 100%;
-    height: 0;
+/* Header and Navigation */
+header {
+    padding: 24px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.inputs {
-    font-size: calc(4.5vmin - 0.5vw);
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
 }
 
-.editInputsContainer {
+.logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--secondary-color), #f07b3f);
+    display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    width: fit-content;
-    max-width: 95vw;
-    flex-wrap: wrap;
-    border: 1px solid black;
-    border-radius:0.80em;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 2px;
-    box-sizing: border-box;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
 }
 
+.brand-name {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--dark-color);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+nav li a {
+    text-decoration: none;
+    color: var(--dark-color);
+    font-weight: 500;
+    font-size: 16px;
+    position: relative;
+    padding-bottom: 4px;
+}
+
+nav li a:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+nav li a:hover:after {
+    width: 100%;
+}
+
+/* Puzzle Section */
+.puzzle-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section-title {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 30px;
+    text-align: center;
+    color: var(--dark-color);
+    position: relative;
+}
+
+.section-title::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: var(--secondary-color);
+}
+
+/* Grid and Puzzle Elements */
+.gridContainer {
+    margin: 0 auto 30px auto;
+    padding: 0;
+    height: calc(50vh - 10vw);
+    width: calc(50vh - 10vw);
+    min-width: 35vh;
+    min-height: 35vh;
+    max-height: 40vw;
+    max-width: 40vw;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.grid {
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-rows: 1fr;
+    height: 100%;
+    gap: 4px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: var(--border-radius);
+}
+
+/* 修复后的 grid-item 样式，移除可能影响不透明度变化的样式 */
+.grid-item {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-size: inherit;
+    position: relative;
+    font-size: 28px;
+    font-weight: 700;
+    cursor: pointer;
+    /* 移除可能干扰JS功能的transition */
+    transition: transform 0.2s ease;
+    overflow: hidden;
+    user-select: none;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+/* 简化hover效果，避免影响opacity */
+.grid-item:hover {
+    transform: scale(0.98);
+}
+
+.grid-item::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-position: inherit;
+    background-size: inherit;
+    background-repeat: no-repeat;
+}
+
+/* 移除hover时对不透明度的影响 */
+/* .grid-item:hover::before {
+    opacity: 0.9;
+} */
+
+/* Control Panels */
+.control-panels {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.panel {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 24px;
+    box-shadow: var(--card-shadow);
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.panel-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+    color: var(--secondary-color);
+}
+
+.panel-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+.panel-subheader {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--dark-color);
+    margin: 20px 0 15px;
+}
+
+.control-item {
+    margin-bottom: 16px;
+}
+
+.stats-content {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.8;
+}
+
+.stats-content p {
+    margin-bottom: 8px;
+}
+
+.stats-content strong {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Buttons and Controls */
 .buttons {
     margin: min(1vh, 1.5vw);
-    border-radius: 0.5em;
+    border-radius: 8px;
     box-sizing: border-box;
     text-align: center;
     position: relative;
     cursor: pointer;
     border: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .fontButtons {
     font-size: max(2.5vh, 1vw);
     padding: min(0.8vh, 1.2vw) min(1.5vh, 2vw);
-    color: #333;
-    font-weight: 500;
+    color: white;
+    font-weight: 600;
     letter-spacing: 0.02em;
 }
 
 .svgButtons {
-    padding: 0.5em; 
+    padding: 0.5em;
     width: max(4vh, 1.2vw);
     height: max(4vh, 1.2vw);
     display: flex;
@@ -250,180 +315,311 @@
 
 .buttons:active {
     transform: translateY(2px);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .buttons:hover {
     opacity: 0.95;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     transform: translateY(-1px);
 }
 
 .buttons:focus {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 81, 255, 0.3), 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 0 0 3px rgba(234, 84, 85, 0.3), 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-icon {
+    margin-right: 8px;
+    font-size: 16px;
 }
 
 .buttonsRow1 {
-    background-color: #f8f9fa;
-    color: #333;
-    border-bottom: 2px solid #e9ecef;
-}
-
-.buttonsRow2 {
-    background-color: #e9ecef;
-    color: #333;
-    border-bottom: 2px solid #dee2e6;
-}
-
-.buttonsRow3 {
-    background-color: #0051ff;
+    background-color: var(--primary-color);
     color: white;
 }
 
-.algorithmsDropdown {
-    font-size: 2vh;
-    padding: 0.9vh;
+.buttonsRow2 {
+    background-color: var(--secondary-color);
+    color: white;
 }
 
+.buttonsRow3 {
+    background-color: #f07b3f;
+    color: white;
+}
+
+/* Algorithm Dropdown */
+.algorithmsDropdown {
+    font-size: 2vh;
+    padding: 0.9vh 1.5vh;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: white;
+    margin: min(1vh, 1.5vw);
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23444' d='M4 6h8l-4 5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 30px;
+}
+
+.algorithmsDropdown:focus {
+    border-color: var(--secondary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(234, 84, 85, 0.3);
+}
+
+/* Edit Inputs Container */
+.editInputsContainer {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}
+
+.editTitle {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--dark-color);
+    margin-bottom: 15px;
+}
+
+/* Dimension Controls */
+.dimension-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 20px 0;
+    width: 100%;
+}
 
 .dimensionInput {
     margin-top: 1vh;
-    /* Keep things centered and a little to the left since we justify flex-end */
-    font-family: "Fira Mono", monospace;
-    width: 60vmin;
-    display: inline-flex;
+    width: 100%;
+    display: flex;
     align-items: center;
-    
-    /* Line up the sliders with each other */
-    justify-content: flex-end;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.inputs {
+    font-size: calc(4.5vmin - 0.5vw);
 }
 
 .numberInput {
-    width: 8vmin;
+    width: 60px;
+    text-align: center;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
 }
 
-.customImageInput {
-}
-
-.imageInputURL {
-    width: 30vmin;
-    line-height:150%;
-}
-
+/* Sliders */
 .slider {
     -webkit-appearance: none;
-    width: 100%;
-    height: max(1vh, 0.5vw);
-    border-radius: 5px;  
-    background: #d3d3d3;
+    flex: 1;
+    height: 6px;
+    border-radius: 3px;
+    background: #eee;
     opacity: 0.7;
     -webkit-transition: .2s;
     transition: opacity .2s;
-    flex-basis: 100%;
 }
 
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: max(3.5vh, 2vw);
-    height: max(3.5vh, 2vw);
-    border-radius: 50%; 
-    background: rgb(0, 81, 255);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--secondary-color);
     cursor: pointer;
+    transition: var(--transition);
+}
+
+.slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
 }
 
 .slider::-moz-range-thumb {
-    width: 6vmin;
-    height: 6vmin;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    background: rgb(0, 81, 255);
+    background: var(--secondary-color);
     cursor: pointer;
 }
 
-input[type=range]:focus {
+.slider:focus {
     opacity: 1;
-    background: #c7c7c7;
+    background: #d1d1d1;
 }
 
-
-/* Lets you see the up/down arrows for dimension inputs at least on chrome */
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button {  
-    -webkit-appearance: textfield;
-    -moz-appearance: textfield;
-    appearance: textfield;
-    opacity: 1;
-
+/* Image Upload Section */
+.image-upload-section {
+    margin-top: 20px;
 }
 
+.image-input-group {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
 
-/* SEO优化后的页脚样式 */
-/* 内容部分样式 */
+.imageInputURL {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+    min-width: 150px;
+}
+
+.imageInputURL:focus {
+    border-color: var(--secondary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(234, 84, 85, 0.3);
+}
+
+/* Output Area */
+.outputAreaContainer {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+.outputArea {
+    flex: 1;
+    height: 150px;
+    font-family: "Fira Mono", monospace;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: var(--border-radius);
+    padding: 12px;
+    font-size: 14px;
+    outline: none;
+    resize: none;
+    cursor: default;
+}
+
+.summaryOutput {
+    flex: 1;
+    text-align: right;
+}
+
+.solutionOutput {
+    flex: 2;
+    overflow-y: auto;
+}
+
+/* Info Sections */
 .info-section {
-    padding: 5vh 0;
-    max-width: 100%;
-    width: 1200px;
-    margin: 0 auto;
-    text-align: center;
-    overflow-x: hidden;
+    padding: 60px 0;
+    background-color: white;
+}
+
+.info-section:nth-child(even) {
+    background-color: #f8f9fa;
 }
 
 .container {
-    width: 90%;
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 0 20px;
 }
 
 .info-section h2 {
-    margin-bottom: 3vh;
-    color: #333;
-    font-size: 2.2rem;
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 40px;
+    text-align: center;
+    color: var(--dark-color);
+    position: relative;
 }
 
-.info-content, .faq-content {
+.info-section h2::after {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: var(--secondary-color);
+}
+
+.info-content {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 2vw;
-    margin-top: 3vh;
+    gap: 30px;
 }
 
-.info-item, .faq-item {
+.info-item {
     flex: 1;
     min-width: 250px;
-    max-width: 400px;
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 2vh 2vw;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-    margin-bottom: 2vh;
+    max-width: 350px;
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
 }
 
-.info-item h3, .faq-item h3 {
-    color: #0051ff;
-    margin-bottom: 1.5vh;
-    font-size: 1.4rem;
+.info-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
 }
 
-.info-item p, .faq-item p {
-    color: #555;
-    line-height: 1.6;
+.info-item h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--primary-color);
 }
 
-/* 分隔内容部分与游戏区域 */
-#how-it-works {
-    margin-top: 5vh;
-    border-top: 1px solid #eee;
-    padding-top: 5vh;
+.info-item p {
+    color: #666;
+    line-height: 1.7;
 }
 
-/* 新的页脚样式 */
+/* FAQ Section */
+.faq-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 25px;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 20px;
+}
+
+.faq-item h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.faq-item p {
+    color: #666;
+    line-height: 1.7;
+}
+
+/* Footer */
 .footer {
-    background-color: #1e2630;
-    color: #fff;
-    padding: 4vh 0 2vh;
-    margin-top: 5vh;
-    width: 100%;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 60px 0 30px;
 }
 
 .footer-container {
@@ -438,63 +634,68 @@ input[type=number]::-webkit-outer-spin-button {
 .footer-column {
     flex: 1;
     min-width: 200px;
-    margin-bottom: 2vh;
+    margin-bottom: 30px;
     padding: 0 15px;
 }
 
 .footer-column h3 {
-    color: #fff;
-    margin-bottom: 1.5vh;
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-column h3::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 30px;
+    background-color: var(--secondary-color);
 }
 
 .footer-column p {
-    color: #adb5bd;
+    color: rgba(255, 255, 255, 0.7);
     line-height: 1.6;
-    margin-bottom: 1vh;
-    font-size: 0.9rem;
+    margin-bottom: 15px;
+    font-size: 14px;
 }
 
 .footer-links {
     list-style: none;
-    padding: 0;
-    margin: 0;
 }
 
 .footer-links li {
-    margin-bottom: 0.8vh;
+    margin-bottom: 12px;
 }
 
 .footer-links a {
-    color: #adb5bd;
+    color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
     transition: color 0.2s;
-    font-size: 0.9rem;
+    font-size: 14px;
 }
 
 .footer-links a:hover {
-    color: #fff;
-    text-decoration: none;
+    color: white;
 }
 
 .footer-bottom {
-    margin-top: 3vh;
-    padding-top: 2vh;
-    border-top: 1px solid #2c3e50;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    margin-top: 30px;
     text-align: center;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 1200px;
+    margin: 30px auto 0;
+    padding: 20px 20px 0;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 2vh 20px 0;
-}
-
-.footer-bottom p {
-    color: #adb5bd;
-    font-size: 0.9rem;
 }
 
 .social-icons {
@@ -503,160 +704,146 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .social-icons a {
-    color: #adb5bd;
+    color: rgba(255, 255, 255, 0.8);
     transition: color 0.2s;
 }
 
 .social-icons a:hover {
-    color: #fff;
+    color: white;
 }
 
-@media screen and (max-width: 768px) {
+/* Preserve Number Input Styling */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+    opacity: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .content {
+        grid-template-columns: 1fr;
+    }
+
+    .panel {
+        margin-bottom: 20px;
+    }
+
+    .gridContainer {
+        width: 320px;
+        height: 320px;
+        min-width: auto;
+        min-height: auto;
+        max-width: 90vw;
+        max-height: 90vw;
+    }
+
+    .section-title {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav ul {
+        gap: 20px;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .content {
+        padding: 20px 0;
+    }
+
     .footer-container {
         flex-direction: column;
     }
-    
+
     .footer-column {
-        margin-bottom: 3vh;
-        min-width: 100%;
+        margin-bottom: 40px;
     }
-    
+
     .footer-bottom {
         flex-direction: column;
-        gap: 2vh;
+        gap: 20px;
     }
-    
+
     .social-icons {
         justify-content: center;
     }
-}
 
-/* 结构化布局 */
-.puzzle-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 100vw;
-    padding: 0 10px;
-    box-sizing: border-box;
-}
-
-/* 无障碍焦点样式 */
-button:focus, select:focus {
-    outline: 2px solid #0051ff;
-    box-shadow: 0 0 8px #0051ff;
-}
-
-/* CSS过渡效果，提升用户体验 */
-.buttons, .grid-item {
-    transition: all 0.2s ease-in-out;
-}
-
-/* 响应式优化 */
-@media screen and (max-width: 768px) {
-    .title {
-        font-size: 2.5vh;
+    .outputAreaContainer {
+        flex-direction: column;
+        height: auto;
     }
-    
+
+    .outputArea {
+        width: 100%;
+        margin: 0 0 15px 0;
+    }
+}
+
+@media (max-width: 576px) {
     .gridContainer {
-        min-width: 30vh;
-        min-height: 30vh;
+        width: 280px;
+        height: 280px;
+        min-width: 280px;
+        min-height: 280px;
     }
-    
-    .buttons {
-        margin: min(0.7vh, 1.2vw);
+
+    .brand-name {
+        font-size: 18px;
     }
-    
+
+    .logo {
+        width: 36px;
+        height: 36px;
+    }
+
+    nav ul {
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
     .fontButtons {
-        font-size: max(2vh, 0.8vw);
+        font-size: 14px;
+        padding: 8px 12px;
     }
-    
-    .imageInputURL {
-        width: 50%;
+
+    .panel {
+        padding: 15px;
     }
-    
-    .container {
-        width: 95%;
+
+    .panel-title {
+        font-size: 16px;
     }
-    
+
+    .dimension-controls {
+        gap: 10px;
+    }
+
     .dimensionInput {
-        width: 90%;
+        flex-wrap: wrap;
     }
-}
 
-/* Extra small devices */
-@media screen and (max-width: 480px) {
-    .nav-links {
-        gap: 1vw;
+    .algorithmsDropdown {
+        font-size: 14px;
+        width: 100%;
+        margin-top: 10px;
     }
-    
-    .nav-links a {
-        padding: 0.4vh 0.6vw;
-        font-size: 0.9rem;
+
+    .image-input-group {
+        flex-direction: column;
+        align-items: stretch;
     }
-    
-    .title {
-        font-size: 2.2vh;
-    }
-    
+
     .imageInputURL {
-        width: 40%;
+        width: 100%;
     }
-}
-
-/* to make the page fill the entire screen */
-html {
-    margin: 0px;
-    height: 100%;
-    width: 100%;
-    overflow-x: hidden;
-}
-
-body {
-    margin: 0px;
-    min-height: 100%;
-    width: 100%;
-    overflow-x: hidden;
-    box-sizing: border-box;
-}
-
-main {
-    width: 100%;
-    max-width: 100vw;
-    overflow-x: hidden;
-}
-
-.outputAreaContainer {
-    width: 100%;
-    margin: 3vh auto 0 auto;
-    height: 15vh;
-}
-
-.summaryOutput {
-    text-align: right;
-    border: none;
-    width: 50%;
-    margin-left: 0%;
-    margin-right: 1vw;
-}
-
-.solutionOutput {
-    text-align: left;
-    overflow-y: scroll;
-    border: solid 1px;
-    border-radius: 5px;
-    width: 22%;
-    max-width: 30%;
-    margin-right: 10%;
-}
-
-.outputArea {
-    height: 100%;
-    font-size: 3vmin;
-    font-family: "Fira Mono", monospace;
-    background-color: transparent;
-    outline: none;
-    resize: none;
-    cursor: default;
 }

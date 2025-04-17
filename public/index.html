@@ -1,302 +1,726 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"></meta>
-    <link rel="icon" href="favicon.ico"></link>
-    <link rel="preload" href="default.jpg" as="image"></link>
-    <link rel="preload" href="bundle.js" as="script"></link>
-    <link rel="preload" href="style.css" as="style"></link>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover"></meta>
-    <meta name="theme-color" content="#4100a3"></meta>
-    <meta name="description" content="Interactive sliding puzzle solver supporting customizable dimensions, images, and editable start/goal states with multiple solving algorithms."></meta>
-    <meta name="keywords" content="sliding puzzle, puzzle solver, algorithmic puzzle, interactive puzzle, custom puzzle, puzzle game"></meta>
-    <meta name="author" content="JWeilhammer"></meta>
-    <meta name="robots" content="index, follow"></meta>
-    <meta property="og:title" content="Sliding Puzzle Solver"></meta>
-    <meta property="og:description" content="Interactive sliding puzzle solver supporting customizable dimensions, images, and editable start/goal states with multiple solving algorithms."></meta>
-    <meta property="og:type" content="website"></meta>
-    <meta property="og:url" content="https://jweilhammer.github.io/sliding-puzzle-solver/"></meta>
-    <meta property="og:image" content="https://jweilhammer.github.io/sliding-puzzle-solver/logo512.png"></meta>
-    <link rel="canonical" href="https://jweilhammer.github.io/sliding-puzzle-solver/"></link>
-    <link rel="apple-touch-icon" href="logo180.png"></link>
-    <link rel="manifest" href="manifest.json"></link>
-    <title>Sliding Puzzle Solver - Interactive Customizable Puzzle Game</title>
-    <!-- 
-      For updating css classes dynmically with JS
-      Using to update all grid tiles with attributes that can't be inherited from the container
-    -->
-    <style id="tileBackgroundCss"></style>
-    <style id="backgroundflipCss"></style>
-    <style id="tileBorderCss"></style>
-</head>
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover"
+        />
+        <title>Sliding Puzzle Master - Professional Puzzle Solver</title>
+        <meta
+            name="description"
+            content="Experience the most advanced sliding puzzle solver with customizable dimensions, professional algorithms, and a sleek interface designed for puzzle enthusiasts."
+        />
+        <meta name="theme-color" content="#2d4059" />
+        <meta
+            name="keywords"
+            content="sliding puzzle, puzzle solver, algorithmic puzzle, interactive puzzle, custom puzzle, puzzle game"
+        />
+        <meta name="author" content="JWeilhammer" />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:title" content="Sliding Puzzle Master" />
+        <meta
+            property="og:description"
+            content="Interactive sliding puzzle solver supporting customizable dimensions, images, and editable start/goal states with multiple solving algorithms."
+        />
+        <meta property="og:type" content="website" />
+        <meta
+            property="og:url"
+            content="https://jweilhammer.github.io/sliding-puzzle-solver/"
+        />
+        <meta
+            property="og:image"
+            content="https://jweilhammer.github.io/sliding-puzzle-solver/logo512.png"
+        />
+        <link rel="icon" href="favicon.ico" />
+        <link rel="preload" href="default.jpg" as="image" />
+        <link rel="preload" href="bundle.js" as="script" />
+        <link rel="preload" href="style.css" as="style" />
+        <link rel="apple-touch-icon" href="logo180.png" />
+        <link rel="manifest" href="manifest.json" />
+        <link
+            rel="canonical"
+            href="https://jweilhammer.github.io/sliding-puzzle-solver/"
+        />
+        <link rel="stylesheet" href="style.css" />
 
-<body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <header>
-        <nav class="main-nav">
-            <div class="nav-logo">
-                <a href="#" class="logo">
-                    <img src="logo192.png" alt="Sliding Puzzle Solver Logo" class="nav-logo-img">
-                    <span>Sliding Puzzle Solver</span>
+        <!-- Original required styles that are dynamically modified by JS -->
+        <style id="tileBackgroundCss"></style>
+        <style id="backgroundflipCss"></style>
+        <style id="tileBorderCss"></style>
+    </head>
+    <body>
+        <noscript>You need to enable JavaScript to run this app.</noscript>
+        <div class="app-container">
+            <header>
+                <a href="#" class="brand">
+                    <div class="logo">SP</div>
+                    <div class="brand-name">Sliding Master</div>
                 </a>
-            </div>
-            
-            <div class="nav-links">
-                <a href="#how-it-works">How It Works</a>
-                <a href="#faq">FAQ</a>
-                <a href="#about">About</a>
-            </div>
-        </nav>
-    </header>
-    <main>
-        <h1 class="title" id="title">Sliding Puzzle</h1>
-        <section class="puzzle-section">
-            <div class="centered gridContainer" id="gridContainer">
-                <div id="grid" class="grid" aria-label="Sliding puzzle grid"></div>
-            </div>
-            <nav id="quickEditButtons" class="centered" aria-label="Quick puzzle actions">
-                <button id="shuffleBtn" class="buttons fontButtons buttonsRow1" aria-label="Shuffle puzzle">Shuffle</button>
-                <button id="resetBtn" class="buttons fontButtons buttonsRow1" aria-label="Reset puzzle">Reset</button>
-                <button id="randomizeBtn" class="buttons fontButtons buttonsRow1" aria-label="Randomize puzzle">Randomize</button>
-            </nav>
+                <nav>
+                    <ul>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </nav>
+            </header>
 
-            <div class="centered" aria-label="Puzzle mode controls">
-                <button id="playBtn" class="buttons fontButtons buttonsRow2" aria-label="Play mode">Solve Myself</button>
-                <button id="editStartBtn" class="buttons fontButtons buttonsRow2" aria-label="Edit start state">Edit Start</button>
-                <button id="editGoalBtn" class="buttons fontButtons buttonsRow2" aria-label="Edit goal state">Edit Goal</button>
+            <div class="content">
+                <div class="puzzle-section">
+                    <h1 class="section-title" id="title">Sliding Puzzle</h1>
+
+                    <div class="gridContainer" id="gridContainer">
+                        <div
+                            id="grid"
+                            class="grid"
+                            aria-label="Sliding puzzle grid"
+                        ></div>
+                    </div>
+
+                    <div
+                        id="quickEditButtons"
+                        class="centered"
+                        aria-label="Quick puzzle actions"
+                    >
+                        <button
+                            id="shuffleBtn"
+                            class="buttons fontButtons buttonsRow1"
+                            aria-label="Shuffle puzzle"
+                        >
+                            <span class="btn-icon">↻</span>
+                            Shuffle
+                        </button>
+                        <button
+                            id="resetBtn"
+                            class="buttons fontButtons buttonsRow1"
+                            aria-label="Reset puzzle"
+                        >
+                            <span class="btn-icon">↺</span>
+                            Reset
+                        </button>
+                        <button
+                            id="randomizeBtn"
+                            class="buttons fontButtons buttonsRow1"
+                            aria-label="Randomize puzzle"
+                        >
+                            <span class="btn-icon">⚄</span>
+                            Randomize
+                        </button>
+                    </div>
+
+                    <div class="centered" aria-label="Puzzle mode controls">
+                        <button
+                            id="playBtn"
+                            class="buttons fontButtons buttonsRow2"
+                            aria-label="Play mode"
+                        >
+                            Solve Myself
+                        </button>
+                        <button
+                            id="editStartBtn"
+                            class="buttons fontButtons buttonsRow2"
+                            aria-label="Edit start state"
+                        >
+                            Edit Start
+                        </button>
+                        <button
+                            id="editGoalBtn"
+                            class="buttons fontButtons buttonsRow2"
+                            aria-label="Edit goal state"
+                        >
+                            Edit Goal
+                        </button>
+                    </div>
+
+                    <div class="centered" aria-label="Solve controls">
+                        <button
+                            id="solveBtn"
+                            class="buttons fontButtons buttonsRow3"
+                            aria-label="Auto-solve puzzle"
+                        >
+                            <span class="btn-icon">▶</span>
+                            Solve For Me
+                        </button>
+                        <select
+                            class="algorithmsDropdown"
+                            id="algorithmsDropdown"
+                            aria-label="Select solving algorithm"
+                        >
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-panels">
+                    <div class="panel">
+                        <div class="panel-header">
+                            <svg
+                                class="panel-icon"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            >
+                                <path
+                                    d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+                                ></path>
+                            </svg>
+                            <h3 class="panel-title">Puzzle Configuration</h3>
+                        </div>
+
+                        <div id="editInputsContainer" class="control-item">
+                            <div
+                                style="
+                                    align-items: center;
+                                    justify-content: center;
+                                    flex-wrap: wrap;
+                                "
+                            >
+                                <div
+                                    style="
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        flex-basis: 100%;
+                                    "
+                                >
+                                    <button
+                                        id="toggleBordersBtn"
+                                        class="buttons svgButtons buttonsRow1"
+                                    >
+                                        <svg
+                                            id="hideBorderSvg"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path
+                                                d="M0 0h.969v.5H1v.469H.969V1H.5V.969H0V0zm2.844 1h-.938V0h.938v1zm1.875 0H3.78V0h.938v1zm1.875 0h-.938V0h.938v1zm.937 0V.969H7.5V.5h.031V0h.938v.5H8.5v.469h-.031V1H7.53zm2.813 0h-.938V0h.938v1zm1.875 0h-.938V0h.938v1zm1.875 0h-.938V0h.938v1zM15.5 1h-.469V.969H15V.5h.031V0H16v.969h-.5V1zM1 1.906v.938H0v-.938h1zm6.5.938v-.938h1v.938h-1zm7.5 0v-.938h1v.938h-1zM1 3.78v.938H0V3.78h1zm6.5.938V3.78h1v.938h-1zm7.5 0V3.78h1v.938h-1zM1 5.656v.938H0v-.938h1zm6.5.938v-.938h1v.938h-1zm7.5 0v-.938h1v.938h-1zM.969 8.5H.5v-.031H0V7.53h.5V7.5h.469v.031H1v.938H.969V8.5zm1.875 0h-.938v-1h.938v1zm1.875 0H3.78v-1h.938v1zm1.875 0h-.938v-1h.938v1zm1.875-.031V8.5H7.53v-.031H7.5V7.53h.031V7.5h.938v.031H8.5v.938h-.031zm1.875.031h-.938v-1h.938v1zm1.875 0h-.938v-1h.938v1zm1.875 0h-.938v-1h.938v1zm1.406 0h-.469v-.031H15V7.53h.031V7.5h.469v.031h.5v.938h-.5V8.5zM0 10.344v-.938h1v.938H0zm7.5 0v-.938h1v.938h-1zm8.5-.938v.938h-1v-.938h1zM0 12.22v-.938h1v.938H0zm7.5 0v-.938h1v.938h-1zm8.5-.938v.938h-1v-.938h1zM0 14.094v-.938h1v.938H0zm7.5 0v-.938h1v.938h-1zm8.5-.938v.938h-1v-.938h1zM.969 16H0v-.969h.5V15h.469v.031H1v.469H.969v.5zm1.875 0h-.938v-1h.938v1zm1.875 0H3.78v-1h.938v1zm1.875 0h-.938v-1h.938v1zm.937 0v-.5H7.5v-.469h.031V15h.938v.031H8.5v.469h-.031v.5H7.53zm2.813 0h-.938v-1h.938v1zm1.875 0h-.938v-1h.938v1zm1.875 0h-.938v-1h.938v1zm.937 0v-.5H15v-.469h.031V15h.469v.031h.5V16h-.969z"
+                                            ></path>
+                                        </svg>
+                                        <svg
+                                            id="showBorderSvg"
+                                            viewBox="0 0 16 16"
+                                            style="display: none"
+                                        >
+                                            <path
+                                                d="M0 0h16v16H0V0zm1 1v6.5h6.5V1H1zm7.5 0v6.5H15V1H8.5zM15 8.5H8.5V15H15V8.5zM7.5 15V8.5H1V15h6.5z"
+                                            ></path>
+                                        </svg>
+                                    </button>
+                                    <button
+                                        id="toggleNumbersBtn"
+                                        class="buttons svgButtons buttonsRow1"
+                                    >
+                                        <svg
+                                            id="hideNumberSvg"
+                                            viewBox="0 0 256 256"
+                                        >
+                                            <rect
+                                                width="380.221"
+                                                height="381.956"
+                                                fill="none"
+                                                x="-63.329"
+                                                y="-35.778"
+                                            />
+                                            <rect
+                                                width="220.948"
+                                                height="203.71"
+                                                fill="none"
+                                                x="8.909"
+                                                y="57.166"
+                                            />
+                                            <polyline
+                                                points="91.35 69.146 129.737 24.908 129.737 222.058"
+                                                fill="none"
+                                                stroke="#000"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="14"
+                                            />
+                                            <polyline
+                                                points="182.805 224.062 77.751 224.577"
+                                                fill="none"
+                                                stroke="#000"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="14"
+                                            />
+                                            <path
+                                                d="M 127.586 121.195 L 245.041 4.374 L 253.11 12.396 L 135.655 129.218 L 251.806 246.036 L 245.041 254.062 L 127.586 137.24 L 10.128 254.062 L 2.06 246.036 L 119.515 129.218 L 2.06 12.396 L 10.128 4.374 L 127.586 121.195 Z"
+                                            />
+                                        </svg>
+                                        <svg
+                                            id="showNumberSvg"
+                                            viewBox="0 0 256 256"
+                                            style="display: none"
+                                        >
+                                            <rect
+                                                width="380.221"
+                                                height="381.956"
+                                                fill="none"
+                                                x="-63.329"
+                                                y="-35.778"
+                                            />
+                                            <rect
+                                                width="220.948"
+                                                height="203.71"
+                                                fill="none"
+                                                x="8.909"
+                                                y="57.166"
+                                            />
+                                            <polyline
+                                                points="91.35 69.146 129.737 24.908 129.737 222.058"
+                                                fill="none"
+                                                stroke="#000"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="14"
+                                            />
+                                            <polyline
+                                                points="182.805 224.062 77.751 224.577"
+                                                fill="none"
+                                                stroke="#000"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="14"
+                                            />
+                                        </svg>
+                                    </button>
+                                    <button
+                                        id="flipPuzzleHorizontalBtn"
+                                        class="buttons svgButtons buttonsRow2"
+                                    >
+                                        <svg viewbox="0 0 48 48">
+                                            <path
+                                                d="M24 6V42"
+                                                stroke="#000000"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                fill="#000000"
+                                            ></path>
+                                            <path
+                                                d="M4 34L16 12V34H4Z"
+                                                fill="#000000"
+                                                stroke="#000000"
+                                                stroke-width="1"
+                                                stroke-linejoin="round"
+                                            ></path>
+                                            <path
+                                                d="M44 34H32V12L44 34Z"
+                                                fill="none"
+                                                stroke="#000000"
+                                                stroke-width="1"
+                                                stroke-linejoin="round"
+                                            ></path>
+                                        </svg>
+                                    </button>
+                                    <button
+                                        id="flipPuzzleVerticalBtn"
+                                        class="buttons svgButtons buttonsRow2"
+                                    >
+                                        <svg viewBox="0 0 48 48">
+                                            <path
+                                                d="M42 24L6 24"
+                                                stroke="#000000"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            ></path>
+                                            <path
+                                                d="M14 4L36 16H14V4Z"
+                                                fill="#000000"
+                                                stroke="#000000"
+                                                stroke-width="1"
+                                                stroke-linejoin="round"
+                                            ></path>
+                                            <path
+                                                d="M14 44V32H36L14 44Z"
+                                                fill="none"
+                                                stroke="#000000"
+                                                stroke-width="1"
+                                                stroke-linejoin="round"
+                                            ></path>
+                                        </svg>
+                                    </button>
+                                    <button
+                                        id="rotatePuzzleBtn"
+                                        class="buttons svgButtons buttonsRow2"
+                                    >
+                                        <svg
+                                            viewBox="0 0 16 16"
+                                            transform="rotate(45)"
+                                        >
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"
+                                                fill="#000000"
+                                            ></path>
+                                            <path
+                                                d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"
+                                                fill="#000000"
+                                            ></path>
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                <div class="dimension-controls">
+                                    <div class="dimensionInput">
+                                        <label class="inputs" for="rowInput"
+                                            >Rows:</label
+                                        >
+                                        <input
+                                            id="rowInput"
+                                            type="number"
+                                            class="inputs numberInput"
+                                            value="3"
+                                        />
+                                        <input
+                                            type="range"
+                                            min="2"
+                                            max="25"
+                                            value="3"
+                                            class="slider"
+                                            id="rowSlider"
+                                        />
+                                    </div>
+
+                                    <div class="dimensionInput">
+                                        <label class="inputs" for="colInput"
+                                            >Cols:</label
+                                        >
+                                        <input
+                                            id="colInput"
+                                            type="number"
+                                            class="inputs numberInput"
+                                            value="3"
+                                        />
+                                        <input
+                                            type="range"
+                                            min="2"
+                                            max="25"
+                                            value="3"
+                                            class="slider"
+                                            id="colSlider"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="image-upload-section">
+                                <div class="panel-subheader">
+                                    Customize Image
+                                </div>
+                                <div class="image-input-group">
+                                    <label for="imageInputURL">URL:</label>
+                                    <input
+                                        type="url"
+                                        id="imageInputURL"
+                                        name="imageInputURL"
+                                        class="imageInputURL"
+                                    />
+                                    <input
+                                        type="file"
+                                        id="imageUploadInput"
+                                        style="display: none"
+                                    />
+                                    <button
+                                        class="buttons fontButtons buttonsRow1"
+                                        onclick="document.getElementById('imageUploadInput').click();"
+                                    >
+                                        Browse
+                                    </button>
+                                    <button
+                                        id="flipImageHorizontalBtn"
+                                        class="buttons svgButtons buttonsRow2"
+                                    >
+                                        <svg viewbox="0 0 48 48">
+                                            <path
+                                                d="M24 6V42"
+                                                stroke="#000000"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                fill="#000000"
+                                            ></path>
+                                            <path
+                                                d="M4 34L16 12V34H4Z"
+                                                fill="#000000"
+                                                stroke="#000000"
+                                                stroke-width="1"
+                                                stroke-linejoin="round"
+                                            ></path>
+                                            <path
+                                                d="M44 34H32V12L44 34Z"
+                                                fill="none"
+                                                stroke="#000000"
+                                                stroke-width="1"
+                                                stroke-linejoin="round"
+                                            ></path>
+                                        </svg>
+                                    </button>
+                                    <button
+                                        id="flipImageVerticalBtn"
+                                        class="buttons svgButtons buttonsRow2"
+                                    >
+                                        <svg viewBox="0 0 48 48">
+                                            <path
+                                                d="M42 24L6 24"
+                                                stroke="#000000"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            ></path>
+                                            <path
+                                                d="M14 4L36 16H14V4Z"
+                                                fill="#000000"
+                                                stroke="#000000"
+                                                stroke-width="1"
+                                                stroke-linejoin="round"
+                                            ></path>
+                                            <path
+                                                d="M14 44V32H36L14 44Z"
+                                                fill="none"
+                                                stroke="#000000"
+                                                stroke-width="1"
+                                                stroke-linejoin="round"
+                                            ></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-header">
+                            <svg
+                                class="panel-icon"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            >
+                                <path
+                                    d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+                                ></path>
+                            </svg>
+                            <h3 class="panel-title">Solution Statistics</h3>
+                        </div>
+                        <div class="stats-content">
+                            <p>Moves required: <strong>--</strong></p>
+                            <p>Algorithm used: <strong>--</strong></p>
+                            <p>Time complexity: <strong>--</strong></p>
+                            <p>Solution time: <strong>--</strong></p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="centered" aria-label="Solve controls">
-                <button id="solveBtn" class="buttons fontButtons buttonsRow3" aria-label="Auto-solve puzzle">Solve for me</button>
-                <select class="algorithmsDropdown" name="algorithms" id="algorithmsDropdown" aria-label="Select solving algorithm">
-                </select>
+
+            <section
+                id="outputAreaContainer"
+                class="outputAreaContainer"
+                style="display: none"
+            >
+                <textarea
+                    id="summaryOutput"
+                    class="outputArea summaryOutput"
+                    readonly
+                    aria-label="Solution summary"
+                ></textarea>
+                <textarea
+                    id="solutionOutput"
+                    class="outputArea solutionOutput"
+                    readonly
+                    aria-label="Solution steps"
+                ></textarea>
+            </section>
+        </div>
+
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="info-section">
+            <div class="container">
+                <h2>How It Works</h2>
+                <div class="info-content">
+                    <div class="info-item">
+                        <h3>1. Customize Your Puzzle</h3>
+                        <p>
+                            Set your puzzle dimensions, choose a custom image,
+                            and configure the start and goal states of your
+                            sliding puzzle.
+                        </p>
+                    </div>
+                    <div class="info-item">
+                        <h3>2. Solve It Yourself</h3>
+                        <p>
+                            Challenge yourself by trying to solve the puzzle
+                            manually - click or tap tiles to slide them into
+                            position.
+                        </p>
+                    </div>
+                    <div class="info-item">
+                        <h3>3. Use Algorithmic Solving</h3>
+                        <p>
+                            Let our advanced algorithms find the optimal
+                            solution path for you. Choose from multiple solving
+                            methods.
+                        </p>
+                    </div>
+                </div>
             </div>
         </section>
 
-    <div id="editInputsContainer" class="editInputsContainer">
-        <div>
-            <div class="editTitle" >Customize Puzzle:</div>
-            <div style="display: flex; align-items: center; justify-content: center; flex-basis: 100%;">
-                <button id="toggleBordersBtn" class="buttons svgButtons buttonsRow1">
-                    <svg id="hideBorderSvg" viewBox="0 0 16 16">
-                        <path d="M0 0h.969v.5H1v.469H.969V1H.5V.969H0V0zm2.844 1h-.938V0h.938v1zm1.875 0H3.78V0h.938v1zm1.875 0h-.938V0h.938v1zm.937 0V.969H7.5V.5h.031V0h.938v.5H8.5v.469h-.031V1H7.53zm2.813
-                        0h-.938V0h.938v1zm1.875 0h-.938V0h.938v1zm1.875 0h-.938V0h.938v1zM15.5 1h-.469V.969H15V.5h.031V0H16v.969h-.5V1zM1 1.906v.938H0v-.938h1zm6.5.938v-.938h1v.938h-1zm7.5 0v-.938h1v.938h-1zM1
-                        3.78v.938H0V3.78h1zm6.5.938V3.78h1v.938h-1zm7.5 0V3.78h1v.938h-1zM1 5.656v.938H0v-.938h1zm6.5.938v-.938h1v.938h-1zm7.5 0v-.938h1v.938h-1zM.969
-                        8.5H.5v-.031H0V7.53h.5V7.5h.469v.031H1v.938H.969V8.5zm1.875 0h-.938v-1h.938v1zm1.875 0H3.78v-1h.938v1zm1.875
-                        0h-.938v-1h.938v1zm1.875-.031V8.5H7.53v-.031H7.5V7.53h.031V7.5h.938v.031H8.5v.938h-.031zm1.875.031h-.938v-1h.938v1zm1.875 0h-.938v-1h.938v1zm1.875 0h-.938v-1h.938v1zm1.406
-                        0h-.469v-.031H15V7.53h.031V7.5h.469v.031h.5v.938h-.5V8.5zM0 10.344v-.938h1v.938H0zm7.5 0v-.938h1v.938h-1zm8.5-.938v.938h-1v-.938h1zM0 12.22v-.938h1v.938H0zm7.5
-                        0v-.938h1v.938h-1zm8.5-.938v.938h-1v-.938h1zM0 14.094v-.938h1v.938H0zm7.5 0v-.938h1v.938h-1zm8.5-.938v.938h-1v-.938h1zM.969 16H0v-.969h.5V15h.469v.031H1v.469H.969v.5zm1.875
-                        0h-.938v-1h.938v1zm1.875 0H3.78v-1h.938v1zm1.875 0h-.938v-1h.938v1zm.937 0v-.5H7.5v-.469h.031V15h.938v.031H8.5v.469h-.031v.5H7.53zm2.813 0h-.938v-1h.938v1zm1.875 0h-.938v-1h.938v1zm1.875
-                        0h-.938v-1h.938v1zm.937 0v-.5H15v-.469h.031V15h.469v.031h.5V16h-.969z" id="mainIconPathAttribute">
-                        </path>
-                    </svg>
-                    <svg id="showBorderSvg" viewBox="0 0 16 16" style="display: none;">
-                        <path d="M0 0h16v16H0V0zm1 1v6.5h6.5V1H1zm7.5 0v6.5H15V1H8.5zM15 8.5H8.5V15H15V8.5zM7.5 15V8.5H1V15h6.5z" id="mainIconPathAttribute"/> </svg>
-                </button>
-                <button id="toggleNumbersBtn" class="buttons svgButtons buttonsRow1">
-                    <svg id="hideNumberSvg" viewBox="0 0 256 256">
-                        <rect width="380.221" height="381.956" fill="none" x="-63.329" y="-35.778""/>
-                        <rect width="220.948" height="203.71" fill="none" x="8.909" y="57.166"/>
-                        <polyline points="91.35 69.146 129.737 24.908 129.737 222.058" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="14"/>
-                        <polyline points="182.805 224.062 77.751 224.577" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="14"/>
-                        <path d="M 127.586 121.195 L 245.041 4.374 L 253.11 12.396 L 135.655 129.218 L 251.806 246.036 L 245.041 254.062 L 127.586 137.24 L 10.128 254.062 L 2.06 246.036 L 119.515 129.218 L 2.06 12.396 L 10.128 4.374 L 127.586 121.195 Z"/>
-                    </svg>
-                    <svg id="showNumberSvg" viewBox="0 0 256 256" style="display: none;">
-                        <rect width="380.221" height="381.956" fill="none" x="-63.329" y="-35.778"/>
-                        <rect width="220.948" height="203.71" fill="none" x="8.909" y="57.166"/>
-                        <polyline points="91.35 69.146 129.737 24.908 129.737 222.058" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="14"/>
-                        <polyline points="182.805 224.062 77.751 224.577" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="14"/>
-                    </svg>
-                </button>
-                <button id="flipPuzzleHorizontalBtn" class="buttons svgButtons buttonsRow2">
-                    <svg viewbox="0 0 48 48">
-                        <path d="M24 6V42" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="mainIconPathAttribute" fill="#000000"></path>
-                        <path d="M4 34L16 12V34H4Z" fill="#000000" stroke="#000000" stroke-width="1" stroke-linejoin="round" id="mainIconPathAttribute"></path>
-                        <path d="M44 34H32V12L44 34Z" fill="none" stroke="#000000" stroke-width="1" stroke-linejoin="round" id="mainIconPathAttribute"></path>
-                    </svg>
-                </button>
-                <button id="flipPuzzleVerticalBtn" class="buttons svgButtons buttonsRow2">
-                    <svg viewBox="0 0 48 48">
-                        <path d="M42 24L6 24" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="mainIconPathAttribute"></path>
-                        <path d="M14 4L36 16H14V4Z" fill="#000000" stroke="#000000" stroke-width="1" stroke-linejoin="round" id="mainIconPathAttribute"></path>
-                        <path d="M14 44V32H36L14 44Z" fill="none" stroke="#000000" stroke-width="1" stroke-linejoin="round" id="mainIconPathAttribute"></path>
-                    </svg>
-                </button>
-                <button id="rotatePuzzleBtn" class="buttons svgButtons buttonsRow2">
-                    <svg viewBox="0 0 16 16" transform="rotate(45)">
-                        <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" id="mainIconPathAttribute" fill="#000000"></path>
-                        <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" id="mainIconPathAttribute" fill="#000000"></path>
-                    </svg>
-                </button>
-            </div>
-
-            <div style="align-items: center; justify-content: center; flex-wrap: wrap;">
-                <div class ="centered" style="flex-basis: 100%;">
-                    <div class ="dimensionInput" style="margin-bottom: 3vmin;">
-                        <label class="inputs" for="rowInput">Rows:</label>
-                        <input id="rowInput" type="number" class="inputs numberInput" value="3"></input>
-                        <input type="range" min="2" max="25" value="3" class="slider" id="rowSlider">
+        <!-- FAQ Section -->
+        <section id="faq" class="info-section">
+            <div class="container">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-content">
+                    <div class="faq-item">
+                        <h3>What is a sliding puzzle?</h3>
+                        <p>
+                            A sliding puzzle is a combination puzzle that
+                            challenges you to slide pieces along certain routes
+                            to establish a certain end-configuration.
+                        </p>
                     </div>
-                </div>
-                
-                <div class ="centered" style="flex-basis: 100%;">
-                    <div class ="dimensionInput">
-                        <label class="inputs" for="colInput">Cols:</label>
-                        <input id="colInput" type="number" class="inputs numberInput" value="3"></input>
-                        <input type="range" min="2" max="25" value="3" class="slider" id="colSlider">
+                    <div class="faq-item">
+                        <h3>What algorithms does this solver use?</h3>
+                        <p>
+                            Our solver implements several algorithms including
+                            A*, IDA*, BFS, and strategic pattern-based solving
+                            methods.
+                        </p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Can I use my own images?</h3>
+                        <p>
+                            Yes! You can upload your own image or provide a URL
+                            to create a custom sliding puzzle.
+                        </p>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div>
-            <div id="customImageInput" class="inputs" style="align-items: center; justify-content: center; flex-wrap: wrap; flex-basis: 100%;">
-                <div class="editTitle" style="margin-top: 1vh;">Customize Image:</div>
-                <div class="centered">
-                    <label for="imageInputURL">URL:</label>
-                    <input type="url" id="imageInputURL" name="imageInputURL" class="imageInputURL"></input>
-                    <input type="file" id="imageUploadInput" style="display: none;""></input>
-                    <input type="button" value="Browse" class="buttons fontButtons" onclick="document.getElementById('imageUploadInput').click();" />
-                    <button id="flipImageHorizontalBtn" class="buttons buttonsRow2 svgButtons">
-                        <svg viewbox="0 0 48 48">
-                            <path d="M24 6V42" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="mainIconPathAttribute" fill="#000000"></path>
-                            <path d="M4 34L16 12V34H4Z" fill="#000000" stroke="#000000" stroke-width="1" stroke-linejoin="round" id="mainIconPathAttribute"></path>
-                            <path d="M44 34H32V12L44 34Z" fill="none" stroke="#000000" stroke-width="1" stroke-linejoin="round" id="mainIconPathAttribute"></path>
-                        </svg> 
-                    </button>
-                    <button id="flipImageVerticalBtn" class="buttons buttonsRow2 svgButtons">
-                        <svg viewBox="0 0 48 48">
-                            <path d="M42 24L6 24" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="mainIconPathAttribute"></path>
-                            <path d="M14 4L36 16H14V4Z" fill="#000000" stroke="#000000" stroke-width="1" stroke-linejoin="round" id="mainIconPathAttribute"></path>
-                            <path d="M14 44V32H36L14 44Z" fill="none" stroke="#000000" stroke-width="1" stroke-linejoin="round" id="mainIconPathAttribute"></path>
+        <!-- About Section -->
+        <section id="about" class="info-section">
+            <div class="container">
+                <h2>About This Project</h2>
+                <p>
+                    The Sliding Puzzle Solver is an interactive web application
+                    that allows users to create, play with, and automatically
+                    solve sliding puzzles of various dimensions. It was
+                    developed to demonstrate algorithms and problem-solving
+                    techniques in a fun, interactive way.
+                </p>
+                <p>
+                    This project showcases multiple path-finding algorithms and
+                    offers a customizable experience for puzzle enthusiasts.
+                </p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h3>Sliding Puzzle Master</h3>
+                    <p>
+                        The most advanced online tool for solving sliding
+                        puzzles with intelligent algorithms.
+                    </p>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Features</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Custom Image Upload</a></li>
+                        <li><a href="#">Multiple Algorithms</a></li>
+                        <li><a href="#">Solution Animation</a></li>
+                        <li><a href="#">Puzzle Customization</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Algorithm Explanation</a></li>
+                        <li><a href="#">Puzzle Theory</a></li>
+                        <li><a href="#">Developer API</a></li>
+                        <li><a href="#">Documentation</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>About</h3>
+                    <ul class="footer-links">
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2023 Sliding Puzzle Master. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <path
+                                fill="currentColor"
+                                d="M12 2.04c-5.5 0-10 4.49-10 10.02 0 5 3.66 9.15 8.44 9.9v-7H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.89 3.78-3.89 1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02z"
+                            ></path>
                         </svg>
-                    </button>
+                    </a>
+                    <a href="#" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <path
+                                fill="currentColor"
+                                d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"
+                            ></path>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Email">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <path
+                                fill="currentColor"
+                                d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+                            ></path>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="GitHub">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <path
+                                fill="currentColor"
+                                d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"
+                            ></path>
+                        </svg>
+                    </a>
                 </div>
             </div>
-        </div>
-    </div>
-    <section id="outputAreaContainer" class="outputAreaContainer" style="display: none;">
-            <textarea id="summaryOutput" class="outputArea summaryOutput" readonly aria-label="Solution summary"></textarea>
-            <textarea id="solutionOutput" class="outputArea solutionOutput" readonly aria-label="Solution steps"></textarea>
-        </section>
-    </main>
-    <!-- 新增的内容部分 -->
-    <section id="how-it-works" class="info-section">
-        <div class="container">
-            <h2>How It Works</h2>
-            <div class="info-content">
-                <div class="info-item">
-                    <h3>1. Customize Your Puzzle</h3>
-                    <p>Set your puzzle dimensions, choose a custom image, and configure the start and goal states of your sliding puzzle.</p>
-                </div>
-                <div class="info-item">
-                    <h3>2. Solve It Yourself</h3>
-                    <p>Challenge yourself by trying to solve the puzzle manually - click or tap tiles to slide them into position.</p>
-                </div>
-                <div class="info-item">
-                    <h3>3. Use Algorithmic Solving</h3>
-                    <p>Let our advanced algorithms find the optimal solution path for you. Choose from multiple solving methods.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        </footer>
 
-    <section id="faq" class="info-section">
-        <div class="container">
-            <h2>Frequently Asked Questions</h2>
-            <div class="faq-content">
-                <div class="faq-item">
-                    <h3>What is a sliding puzzle?</h3>
-                    <p>A sliding puzzle is a combination puzzle that challenges you to slide pieces along certain routes to establish a certain end-configuration.</p>
-                </div>
-                <div class="faq-item">
-                    <h3>What algorithms does this solver use?</h3>
-                    <p>Our solver implements several algorithms including A*, IDA*, BFS, and strategic pattern-based solving methods.</p>
-                </div>
-                <div class="faq-item">
-                    <h3>Can I use my own images?</h3>
-                    <p>Yes! You can upload your own image or provide a URL to create a custom sliding puzzle.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="info-section">
-        <div class="container">
-            <h2>About This Project</h2>
-            <p>The Sliding Puzzle Solver is an interactive web application that allows users to create, play with, and automatically solve sliding puzzles of various dimensions. It was developed to demonstrate algorithms and problem-solving techniques in a fun, interactive way.</p>
-            <p>This project showcases multiple path-finding algorithms and offers a customizable experience for puzzle enthusiasts.</p>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-column">
-                <h3>Sliding Puzzle Solver</h3>
-                <p>The most advanced online tool for solving sliding puzzles with intelligent algorithms.</p>
-            </div>
-            
-            <div class="footer-column">
-                <h3>Features</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Custom Image Upload</a></li>
-                    <li><a href="#">Multiple Algorithms</a></li>
-                    <li><a href="#">Solution Animation</a></li>
-                    <li><a href="#">Puzzle Customization</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-column">
-                <h3>Resources</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Algorithm Explanation</a></li>
-                    <li><a href="#">Puzzle Theory</a></li>
-                    <li><a href="#">Developer API</a></li>
-                    <li><a href="#">Documentation</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-column">
-                <h3>About</h3>
-                <ul class="footer-links">
-                    <li><a href="#how-it-works">How It Works</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2023 Sliding Puzzle Solver. All rights reserved.</p>
-            <div class="social-icons">
-                <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2.04c-5.5 0-10 4.49-10 10.02 0 5 3.66 9.15 8.44 9.9v-7H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.89 3.78-3.89 1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02z"></path></svg></a>
-                <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"></path></svg></a>
-                <a href="#" aria-label="Email"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg></a>
-                <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"></path></svg></a>
-            </div>
-        </div>
-    </footer>
-
-    <!-- 结构化数据用于Google搜索结果增强显示 -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "Sliding Puzzle Solver",
-        "description": "Interactive sliding puzzle solver supporting customizable dimensions, images, and editable start/goal states with multiple solving algorithms.",
-        "url": "https://jweilhammer.github.io/sliding-puzzle-solver/",
-        "applicationCategory": "GameApplication",
-        "operatingSystem": "Any",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-        },
-        "author": {
-            "@type": "Person",
-            "name": "JWeilhammer"
-        }
-    }
-    </script>
-</body>
+        <!-- 结构化数据用于Google搜索结果增强显示 -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "WebApplication",
+                "name": "Sliding Puzzle Master",
+                "description": "Interactive sliding puzzle solver supporting customizable dimensions, images, and editable start/goal states with multiple solving algorithms.",
+                "url": "https://jweilhammer.github.io/sliding-puzzle-solver/",
+                "applicationCategory": "GameApplication",
+                "operatingSystem": "Any",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD"
+                },
+                "author": {
+                    "@type": "Person",
+                    "name": "JWeilhammer"
+                }
+            }
+        </script>
+    </body>
 </html>
