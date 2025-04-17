@@ -507,34 +507,27 @@
                             </svg>
                             <h3 class="panel-title">Solution Statistics</h3>
                         </div>
-                        <div class="stats-content">
+                        <div id="statsContent" class="stats-content">
                             <p>Moves required: <strong>--</strong></p>
                             <p>Algorithm used: <strong>--</strong></p>
                             <p>Time complexity: <strong>--</strong></p>
                             <p>Solution time: <strong>--</strong></p>
+                            
+                            <!-- 集成输出区域到统计面板中 -->
+                            <div id="outputAreaContainer" class="integrated-output-area" style="display: none">
+                                <div class="output-section">
+                                    <h4 class="output-title">Solution Summary</h4>
+                                    <div id="summaryOutput" class="output-content summary-output" readonly></div>
+                                </div>
+                                <div class="output-section">
+                                    <h4 class="output-title">Move List</h4>
+                                    <div id="solutionOutput" class="output-content solution-output" readonly></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <section
-                id="outputAreaContainer"
-                class="outputAreaContainer"
-                style="display: none"
-            >
-                <textarea
-                    id="summaryOutput"
-                    class="outputArea summaryOutput"
-                    readonly
-                    aria-label="Solution summary"
-                ></textarea>
-                <textarea
-                    id="solutionOutput"
-                    class="outputArea solutionOutput"
-                    readonly
-                    aria-label="Solution steps"
-                ></textarea>
-            </section>
         </div>
 
         <!-- How It Works Section -->

@@ -98,23 +98,34 @@ const solvePuzzle = () => {
 	}
 
 	// Output summary to screen
-	summaryOutput.value = "";
-	summaryOutput.value += `Runtime: ${solution["runtimeMs"].toFixed(3)}ms\n`;
-	summaryOutput.value += `Moves: ${solutionMoves.length} ${
+	summaryOutput.innerHTML = "";
+	summaryOutput.innerHTML += `Runtime: ${solution["runtimeMs"].toFixed(3)}ms<br>`;
+	summaryOutput.innerHTML += `Moves: ${solutionMoves.length} ${
 		selectedAlgorithm !== "Strategic" || solutionMoves.length === 0 || solutionMoves.length === 1
 			? "(optimal)"
 			: "(nonoptimal)"
-	}\n`;
-	summaryOutput.value += `Max puzzles in memory: ${solution["maxPuzzlesInMemory"]}`;
+	}<br>`;
+	summaryOutput.innerHTML += `Max puzzles in memory: ${solution["maxPuzzlesInMemory"]}`;
 	console.log(algorithm.name, "SOLUTION:", solutionMoves.length - 1, solutionMoves);
 
 	// Output move list to screen
-	let moveList = "Move list:\n";
+	let moveList = "Move list:<br>";
 	for (const [index, move] of solutionMoves.slice(0, 20000).entries()) {
-		moveList += `${index + 1}: ${move}\n`;
+		moveList += `${index + 1}: ${move}<br>`;
 	}
-	solutionOutput.value = moveList;
-	solutionOutput.value += solutionMoves.length > 20000 ? "See console for full move list...\n" : "";
+	solutionOutput.innerHTML = moveList;
+	solutionOutput.innerHTML += solutionMoves.length > 20000 ? "See console for full move list...<br>" : "";
+	
+	// 同时更新统计面板的信息
+	const statsContent = document.getElementById("statsContent");
+	if (statsContent) {
+		const statsParagraphs = statsContent.querySelectorAll("p");
+		if (statsParagraphs.length >= 4) {
+			statsParagraphs[0].innerHTML = `Moves required: <strong>${solutionMoves.length}</strong>`;
+			statsParagraphs[1].innerHTML = `Algorithm used: <strong>${selectedAlgorithm}</strong>`;
+			statsParagraphs[3].innerHTML = `Solution time: <strong>${solution["runtimeMs"].toFixed(3)}ms</strong>`;
+		}
+	}
 
 	// Animate the solution
 	animateMoveList(originalPuzzle, solutionMoves);

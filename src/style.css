@@ -484,38 +484,54 @@ nav li a:hover:after {
     box-shadow: 0 0 0 3px rgba(234, 84, 85, 0.3);
 }
 
-/* Output Area */
-.outputAreaContainer {
-    display: flex;
-    gap: 20px;
-    padding: 20px;
-    width: 100%;
-    margin: 20px auto;
-    max-width: 1200px;
+/* Output Area - 新的整合式样式 */
+.integrated-output-area {
+    margin-top: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 15px;
 }
 
-.outputArea {
-    flex: 1;
-    height: 150px;
+.output-section {
+    margin-bottom: 15px;
+}
+
+.output-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+}
+
+.output-content {
     font-family: "Fira Mono", monospace;
     background-color: #f8f9fa;
     border: 1px solid #e9ecef;
     border-radius: var(--border-radius);
     padding: 12px;
     font-size: 14px;
-    outline: none;
-    resize: none;
     cursor: default;
-}
-
-.summaryOutput {
-    flex: 1;
-    text-align: right;
-}
-
-.solutionOutput {
-    flex: 2;
+    white-space: pre-wrap;
+    max-height: 170px;
     overflow-y: auto;
+}
+
+.summary-output {
+    margin-bottom: 15px;
+}
+
+.solution-output {
+    max-height: 250px;
+}
+
+/* 保留原输出区域样式用于兼容 */
+.outputAreaContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.summaryOutput, .solutionOutput {
+    width: 100%;
 }
 
 /* Info Sections */

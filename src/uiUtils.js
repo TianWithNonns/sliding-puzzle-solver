@@ -714,7 +714,7 @@ const hideOutputTextAreas = () => {
 };
 
 const showOutputTextAreas = () => {
-	outputAreaContainer.style.display = null;
+	outputAreaContainer.style.display = "block";
 };
 
 // Reset our tile background positions and number overlays/ids for the current dimensions
