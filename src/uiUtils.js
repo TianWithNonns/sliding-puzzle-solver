@@ -998,14 +998,16 @@ let showNumbers = true;
 const toggleNumbers = () => {
 	if (showNumbers) {
 		showNumbers = false;
-		grid.style.fontSize = 0;
+		grid.style.fontSize = "0px"; // 明确设置为0px而不只是0
 		showNumberSvg.style.display = null;
 		hideNumberSvg.style.display = "none";
+		console.log("隐藏数字 - fontSize设置为:", grid.style.fontSize);
 	} else {
 		showNumbers = true;
 		showNumberSvg.style.display = "none";
 		hideNumberSvg.style.display = null;
 		updateBackgroundImageSize();
+		console.log("显示数字 - fontSize更新为:", grid.style.fontSize);
 	}
 };
 

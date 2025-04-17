@@ -175,7 +175,7 @@ nav li a:hover:after {
     border-radius: var(--border-radius);
 }
 
-/* 修复后的 grid-item 样式，移除可能影响不透明度变化的样式 */
+/* 修复后的 grid-item 样式，确保不阻止数字隐藏功能 */
 .grid-item {
     margin: 0;
     padding: 0;
@@ -185,10 +185,10 @@ nav li a:hover:after {
     justify-content: center;
     background-size: inherit;
     position: relative;
-    font-size: 28px;
+    /* 移除这里的固定字体大小，改用inherit，确保能继承grid的fontSize设置 */
+    font-size: inherit;
     font-weight: 700;
     cursor: pointer;
-    /* 移除可能干扰JS功能的transition */
     transition: transform 0.2s ease;
     overflow: hidden;
     user-select: none;
