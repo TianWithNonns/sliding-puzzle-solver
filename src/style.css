@@ -487,7 +487,6 @@ nav li a:hover:after {
 /* Output Area - 新的整合式样式 */
 .integrated-output-area {
     margin-top: 20px;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
     padding-top: 15px;
 }
 
