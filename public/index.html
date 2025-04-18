@@ -412,7 +412,9 @@
                                     Customize Image
                                 </div>
                                 <div class="image-input-group">
-                                    <label for="imageInputURL">IMAGE URL:</label>
+                                    <label for="imageInputURL"
+                                        >IMAGE URL:</label
+                                    >
                                     <input
                                         type="url"
                                         id="imageInputURL"
@@ -428,7 +430,7 @@
                                         class="buttons fontButtons buttonsRow1"
                                         onclick="document.getElementById('imageUploadInput').click();"
                                     >
-                                        Browse
+                                        UPLOAD
                                     </button>
                                     <button
                                         id="flipImageHorizontalBtn"
@@ -512,16 +514,30 @@
                             <p>Algorithm used: <strong>--</strong></p>
                             <p>Time complexity: <strong>--</strong></p>
                             <p>Solution time: <strong>--</strong></p>
-                            
+
                             <!-- 集成输出区域到统计面板中 -->
-                            <div id="outputAreaContainer" class="integrated-output-area" style="display: none">
+                            <div
+                                id="outputAreaContainer"
+                                class="integrated-output-area"
+                                style="display: none"
+                            >
                                 <div class="output-section">
-                                    <h4 class="output-title">Solution Summary</h4>
-                                    <div id="summaryOutput" class="output-content summary-output" readonly></div>
+                                    <h4 class="output-title">
+                                        Solution Summary
+                                    </h4>
+                                    <div
+                                        id="summaryOutput"
+                                        class="output-content summary-output"
+                                        readonly
+                                    ></div>
                                 </div>
                                 <div class="output-section">
                                     <h4 class="output-title">Move List</h4>
-                                    <div id="solutionOutput" class="output-content solution-output" readonly></div>
+                                    <div
+                                        id="solutionOutput"
+                                        class="output-content solution-output"
+                                        readonly
+                                    ></div>
                                 </div>
                             </div>
                         </div>
@@ -586,19 +602,21 @@
                     </div>
                     <div class="faq-item">
                         <h3>How do I control the puzzle states?</h3>
+                        <p>The puzzle has two main states you can customize:</p>
                         <p>
-                            The puzzle has two main states you can customize:
+                            <strong>Edit Start</strong>: This button lets you
+                            customize the starting configuration of the puzzle
+                            by freely dragging and rearranging tiles.
                         </p>
                         <p>
-                            <strong>Edit Start</strong>: This button lets you customize the starting configuration 
-                            of the puzzle by freely dragging and rearranging tiles.
+                            <strong>Edit Goal</strong>: This button allows you
+                            to define a custom goal state that the puzzle should
+                            be solved to, rather than using the default ordered
+                            configuration.
                         </p>
                         <p>
-                            <strong>Edit Goal</strong>: This button allows you to define a custom goal state 
-                            that the puzzle should be solved to, rather than using the default ordered configuration.
-                        </p>
-                        <p>
-                            <strong>Solve Myself</strong>: Once you've set up your puzzle, click this button to try solving it 
+                            <strong>Solve Myself</strong>: Once you've set up
+                            your puzzle, click this button to try solving it
                             manually by sliding tiles according to puzzle rules.
                         </p>
                     </div>
