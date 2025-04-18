@@ -116,16 +116,7 @@ const solvePuzzle = () => {
 	solutionOutput.innerHTML = moveList;
 	solutionOutput.innerHTML += solutionMoves.length > 20000 ? "See console for full move list...<br>" : "";
 	
-	// 同时更新统计面板的信息
-	const statsContent = document.getElementById("statsContent");
-	if (statsContent) {
-		const statsParagraphs = statsContent.querySelectorAll("p");
-		if (statsParagraphs.length >= 4) {
-			statsParagraphs[0].innerHTML = `Moves required: <strong>${solutionMoves.length}</strong>`;
-			statsParagraphs[1].innerHTML = `Algorithm used: <strong>${selectedAlgorithm}</strong>`;
-			statsParagraphs[3].innerHTML = `Solution time: <strong>${solution["runtimeMs"].toFixed(3)}ms</strong>`;
-		}
-	}
+	// 移除了重复的统计面板更新代码
 
 	// Animate the solution
 	animateMoveList(originalPuzzle, solutionMoves);
