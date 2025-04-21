@@ -401,6 +401,7 @@ nav li a:hover:after {
     grid-template-columns: 60px 70px 1fr;
     align-items: center;
     gap: 10px;
+    margin-bottom: 15px;
 }
 
 .inputs {
@@ -415,6 +416,16 @@ nav li a:hover:after {
     border-radius: 8px;
     font-size: 14px;
     justify-self: start;
+    width: 60px;
+    text-align: center;
+}
+
+/* Label styles for dimension inputs */
+.dimensionInput label {
+    display: inline-block;
+    width: 60px;
+    text-align: left;
+    font-weight: 500;
 }
 
 /* Sliders */
