@@ -486,7 +486,7 @@ nav li a:hover:after {
     margin-top: 1vh;
     width: 100%;
     display: grid;
-    grid-template-columns: 110px 1fr;
+    grid-template-columns: 180px 1fr;
     align-items: center;
     gap: 25px;
     margin-bottom: 10px;
@@ -494,25 +494,28 @@ nav li a:hover:after {
 
 .image-input-group label {
     display: inline-block;
-    width: 100px;
+    width: 180px;
     text-align: left;
-    font-weight: 500;
+    font-weight: 600;
     padding-right: 25px;
     overflow: visible;
     white-space: nowrap;
     position: relative;
-    font-size: calc(4.5vmin - 0.5vw);
+    font-size: calc(5vmin - 0.5vw);
+    color: var(--dark-color);
+    text-transform: uppercase;
 }
 
 .imageInputURL {
     flex: 1;
-    padding: 7px 10px;
+    padding: 10px 12px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    font-size: 14px;
+    font-size: 15px;
     transition: border-color 0.2s ease;
     min-width: 150px;
-    height: 34px;
+    height: 42px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .imageInputURL:focus {
