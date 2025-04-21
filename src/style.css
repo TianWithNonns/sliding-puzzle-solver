@@ -398,9 +398,9 @@ nav li a:hover:after {
     margin-top: 1vh;
     width: 100%;
     display: grid;
-    grid-template-columns: 100px 60px 1fr;
+    grid-template-columns: 110px 60px 1fr;
     align-items: center;
-    gap: 20px;
+    gap: 25px;
     margin-bottom: 15px;
 }
 
@@ -426,7 +426,7 @@ nav li a:hover:after {
     width: 100px;
     text-align: left;
     font-weight: 500;
-    padding-right: 15px;
+    padding-right: 25px;
     overflow: visible;
     white-space: nowrap;
     position: relative;
