@@ -483,6 +483,23 @@ nav li a:hover:after {
     align-items: center;
     flex-wrap: wrap;
     gap: 10px;
+    margin-top: 1vh;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    align-items: center;
+    gap: 25px;
+}
+
+.image-input-group label {
+    display: inline-block;
+    width: 100px;
+    text-align: left;
+    font-weight: 500;
+    padding-right: 25px;
+    overflow: visible;
+    white-space: nowrap;
+    position: relative;
 }
 
 .imageInputURL {
