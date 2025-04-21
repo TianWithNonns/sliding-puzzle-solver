@@ -489,6 +489,7 @@ nav li a:hover:after {
     grid-template-columns: 110px 1fr;
     align-items: center;
     gap: 25px;
+    margin-bottom: 10px;
 }
 
 .image-input-group label {
@@ -500,16 +501,18 @@ nav li a:hover:after {
     overflow: visible;
     white-space: nowrap;
     position: relative;
+    font-size: calc(4.5vmin - 0.5vw);
 }
 
 .imageInputURL {
     flex: 1;
-    padding: 10px 12px;
+    padding: 7px 10px;
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 14px;
     transition: border-color 0.2s ease;
     min-width: 150px;
+    height: 34px;
 }
 
 .imageInputURL:focus {
