@@ -407,12 +407,13 @@
                                 </div>
                                 <div class="image-input-group">
                                     <label for="imageInputURL">IMAGE URL:</label>
-                                    <div style="display: flex; gap: 10px;">
+                                    <div style="display: flex; gap: 10px; align-items: center; width: 100%;">
                                         <input
                                             type="url"
                                             id="imageInputURL"
                                             name="imageInputURL"
                                             class="imageInputURL"
+                                            style="flex: 1;"
                                         />
                                         <input
                                             type="file"
@@ -421,6 +422,7 @@
                                         />
                                         <button
                                             class="buttons fontButtons buttonsRow1"
+                                            style="margin-left: 10px; min-width: 100px;"
                                             onclick="document.getElementById('imageUploadInput').click();"
                                         >
                                             UPLOAD

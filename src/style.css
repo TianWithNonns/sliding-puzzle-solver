@@ -486,7 +486,7 @@ nav li a:hover:after {
     margin-top: 1vh;
     width: 100%;
     display: grid;
-    grid-template-columns: 180px 1fr;
+    grid-template-columns: 110px 1fr;
     align-items: center;
     gap: 25px;
     margin-bottom: 10px;
@@ -517,6 +517,7 @@ nav li a:hover:after {
     min-width: 150px;
     height: 42px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    width: calc(100% - 110px);
 }
 
 .imageInputURL:focus {
