@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jweilhammer.github.io/sliding-puzzle-solver/sitemap.xml
+Sitemap: https://slidingpuzzlesolver.org/sitemap.xml
