@@ -5,22 +5,27 @@ import {
 	solvePuzzleIDAStar,
 	solvePuzzleAStarClosedSet,
 	solvePuzzleAStar,
-	solvePuzzleBFS } from "./searchAlgorithms.js";
-import { animateMoveList, checkPuzzleBeforeAnimating, initializeUiElements } from "./uiUtils.js";
-
+	solvePuzzleBFS,
+} from "./searchAlgorithms.js";
+import {
+	animateMoveList,
+	checkPuzzleBeforeAnimating,
+	initializeUiElements,
+} from "./uiUtils.js";
 
 // When page is finished loading
-window.addEventListener('load', () => {
+window.addEventListener("load", () => {
 	// Enable offline access for Mobile (PWA)
 	// Webpack is smart and will remove dev check during production builds :-)
-	if ('serviceWorker' in navigator) {
-		if (process.env.NODE_ENV === 'development') {
-			console.log('In development mode, will not register service worker');
+	if ("serviceWorker" in navigator) {
+		if (process.env.NODE_ENV === "development") {
+			console.log("In development mode, will not register service worker");
 		} else {
-			navigator.serviceWorker.register('./service-worker.js')
-			.catch(registrationError => {
-				console.log('Failed to enable offline access', registrationError);
-			});
+			navigator.serviceWorker
+				.register("./service-worker.js")
+				.catch((registrationError) => {
+					console.log("Failed to enable offline access", registrationError);
+				});
 		}
 	}
 
@@ -39,7 +44,6 @@ window.addEventListener('load', () => {
 		solvePuzzle();
 	});
 });
-
 
 // Maps dropdown values to our solver functions
 const algorithmMappings = {
@@ -75,11 +79,9 @@ const solvePuzzle = () => {
 	let solution = algorithm(startingPuzzle, state.goalPuzzle);
 	let solutionMoves = [];
 	if (solution["solutionMoves"]) {
-
 		// Strategic algorithm keeps track of solution moves for us
 		solutionMoves = solution["solutionMoves"];
 	} else {
-
 		// Get inverse of our slide Directions so we can get the key from the value
 		let solutionPuzzle = solution["solutionPuzzle"];
 		Object.keys(slideDirections).forEach((key) => {
@@ -101,12 +103,19 @@ const solvePuzzle = () => {
 	summaryOutput.innerHTML = "";
 	summaryOutput.innerHTML += `Runtime: ${solution["runtimeMs"].toFixed(3)}ms<br>`;
 	summaryOutput.innerHTML += `Moves: ${solutionMoves.length} ${
-		selectedAlgorithm !== "Strategic" || solutionMoves.length === 0 || solutionMoves.length === 1
+		selectedAlgorithm !== "Strategic" ||
+		solutionMoves.length === 0 ||
+		solutionMoves.length === 1
 			? "(optimal)"
 			: "(nonoptimal)"
 	}<br>`;
 	summaryOutput.innerHTML += `Max puzzles in memory: ${solution["maxPuzzlesInMemory"]}`;
-	console.log(algorithm.name, "SOLUTION:", solutionMoves.length - 1, solutionMoves);
+	console.log(
+		algorithm.name,
+		"SOLUTION:",
+		solutionMoves.length - 1,
+		solutionMoves,
+	);
 
 	// Output move list to screen
 	let moveList = "Move list:<br>";
@@ -114,8 +123,9 @@ const solvePuzzle = () => {
 		moveList += `${index + 1}: ${move}<br>`;
 	}
 	solutionOutput.innerHTML = moveList;
-	solutionOutput.innerHTML += solutionMoves.length > 20000 ? "See console for full move list...<br>" : "";
-	
+	solutionOutput.innerHTML +=
+		solutionMoves.length > 20000 ? "See console for full move list...<br>" : "";
+
 	// 移除了重复的统计面板更新代码
 
 	// Animate the solution
