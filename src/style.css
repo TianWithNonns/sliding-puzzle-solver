@@ -397,9 +397,9 @@ nav li a:hover:after {
 .dimensionInput {
     margin-top: 1vh;
     width: 100%;
-    display: flex;
+    display: grid;
+    grid-template-columns: 60px 70px 1fr;
     align-items: center;
-    justify-content: space-between;
     gap: 10px;
 }
 
@@ -414,6 +414,7 @@ nav li a:hover:after {
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 14px;
+    justify-self: start;
 }
 
 /* Sliders */
