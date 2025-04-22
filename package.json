@@ -4,6 +4,7 @@
   "description": "Cool sliding puzzle program that can solve puzzles for you using different algorithms",
   "private": true,
   "devDependencies": {
+    "copy-webpack-plugin": "^13.0.0",
     "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "^4.0.0",
     "esm": "^3.2.25",

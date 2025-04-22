@@ -6,6 +6,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // Mobile/PWA offline access
 const WorkboxPlugin = require('workbox-webpack-plugin');
@@ -44,6 +45,20 @@ const config = {
       title: 'Output Management',
       template: './public/index.html',
       favicon: './public/favicon.ico'
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        { 
+          from: 'public/*.xml', 
+          to: '[name][ext]',
+          noErrorOnMissing: true 
+        },
+        { 
+          from: 'public/robots.txt', 
+          to: 'robots.txt',
+          noErrorOnMissing: true 
+        }
+      ],
     }),
   ],
   devServer: {
