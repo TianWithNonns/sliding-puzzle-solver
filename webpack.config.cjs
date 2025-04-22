@@ -22,8 +22,8 @@ const config = {
         test: /\.(png|svg|jpg|jpeg|gif|json|xml)$/i,
         type: 'asset/resource',
         generator: {
-            publicPath: '',
-            filename: '[file]'
+          publicPath: '',
+          filename: '[file]'
         },
       },
     ],
@@ -41,9 +41,9 @@ const config = {
       chunkFilename: "[id].css",
     }),
     new HtmlWebpackPlugin({
-        title: 'Output Management',
-        template: './public/index.html',
-        favicon: './public/favicon.ico'
+      title: 'Output Management',
+      template: './public/index.html',
+      favicon: './public/favicon.ico'
     }),
   ],
   devServer: {
@@ -73,7 +73,7 @@ module.exports = (env, argv) => {
           {
             urlPattern: RegExp('(.*?)'),
             handler: "StaleWhileRevalidate"
-          } 
+          }
         ]
       }),
     );
