@@ -1,92 +1,98 @@
-
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 
-module.exports = {
+// JS, HTML & CSS minification
+const TerserPlugin = require("terser-webpack-plugin");
+
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+// Mobile/PWA offline access
+const WorkboxPlugin = require('workbox-webpack-plugin');
+
+const config = {
   entry: './src/index.js',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
-  },
   module: {
     rules: [
       {
-        test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
+        test: /\.(png|svg|jpg|jpeg|gif|json|xml)$/i,
         type: 'asset/resource',
+        generator: {
+          publicPath: '',
+          filename: '[file]'
+        },
       },
-    ]
+    ],
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin(),
+      new CssMinimizerPlugin(),
+    ],
   },
   plugins: [
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "style.css",
+      chunkFilename: "[id].css",
+    }),
     new HtmlWebpackPlugin({
+      title: 'Output Management',
       template: './public/index.html',
-      minify: {
-        removeAttributeQuotes: true,
-        collapseWhitespace: true,
-        removeComments: true
-      }
+      favicon: './public/favicon.ico'
     }),
     new CopyWebpackPlugin({
       patterns: [
         { 
+          from: 'public/*.xml', 
+          to: '[name][ext]',
+          noErrorOnMissing: true 
+        },
+        { 
           from: 'public/robots.txt', 
-          to: 'robots.txt' 
-        },
-        { 
-          from: 'public/sitemap.xml', 
-          to: 'sitemap.xml',
-          // 确保 XML 文件被作为文本文件处理，保留原格式
-          transform(content) {
-            return content;
-          }
-        },
-        { 
-          from: 'public/favicon.ico', 
-          to: 'favicon.ico' 
-        },
-        { 
-          from: 'public/logo180.png', 
-          to: 'logo180.png' 
-        },
-        { 
-          from: 'public/logo192.png', 
-          to: 'logo192.png' 
-        },
-        { 
-          from: 'public/logo512.png', 
-          to: 'logo512.png' 
-        },
-        { 
-          from: 'public/default.jpg', 
-          to: 'default.jpg' 
-        },
-        { 
-          from: 'public/manifest.json', 
-          to: 'manifest.json' 
-        },
+          to: 'robots.txt',
+          noErrorOnMissing: true 
+        }
       ],
     }),
   ],
-  optimization: {
-    minimizer: [
-      new CssMinimizerPlugin(),
-      new TerserPlugin()
-    ],
-  },
   devServer: {
-    static: {
-      directory: path.join(__dirname, 'public'),
-    },
-    compress: true,
+    allowedHosts: 'all',
+    host: '0.0.0.0',
     port: 8080,
+  },
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+    clean: true,
+  },
+}
+
+module.exports = (env, argv) => {
+
+  // Add service worker for offline access via caching if building for prod
+  if (argv.mode === 'production') {
+    config.plugins.push(
+      new WorkboxPlugin.GenerateSW({
+        // Default settings, serve from cache first and avoid multiple SWs from running at same time
+        clientsClaim: true,
+        skipWaiting: true,
+
+        // Serve from cache and update from network after
+        runtimeCaching: [
+          {
+            urlPattern: RegExp('(.*?)'),
+            handler: "StaleWhileRevalidate"
+          }
+        ]
+      }),
+    );
   }
+
+  return config;
 };
