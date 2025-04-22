@@ -19,7 +19,7 @@ const config = {
         use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif|json)$/i,
+        test: /\.(png|svg|jpg|jpeg|gif|json|xml)$/i,
         type: 'asset/resource',
         generator: {
             publicPath: '',
