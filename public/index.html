@@ -2,35 +2,43 @@
 <html lang="en">
     <head>
         <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-8G0STZKD9D"></script>
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-8G0STZKD9D"
+        ></script>
         <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
 
-          gtag('config', 'G-8G0STZKD9D');
+            gtag("config", "G-8G0STZKD9D");
         </script>
         <meta charset="utf-8" />
         <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover"
         />
-        <title>Sliding Puzzle Master - Professional Puzzle Solver</title>
+        <title>Sliding Puzzle Solver</title>
         <meta
             name="description"
-            content="Experience the most advanced sliding puzzle solver with customizable dimensions, professional algorithms, and a sleek interface designed for puzzle enthusiasts."
+            content="Free online sliding puzzle solver for all puzzle types - 3x3, 4x4, 6x6, 10x10, hollow, middle empty and no-hole puzzles. Upload your image or use our templates at slidingpuzzlesolver.org."
         />
         <meta name="theme-color" content="#2d4059" />
         <meta
             name="keywords"
-            content="sliding puzzle, puzzle solver, algorithmic puzzle, interactive puzzle, custom puzzle, puzzle game"
+            content="sliding puzzle solver, 3x3 sliding puzzle, 4x4 sliding puzzle, 6x6 sliding puzzle, 10x10 sliding puzzle, online puzzle solver, sliding block puzzle, hollow sliding puzzle, middle empty puzzle, no-hole puzzle, picture puzzle solver, free puzzle tool"
         />
-        <meta name="author" content="JWeilhammer" />
+        <meta name="author" content="Sliding Puzzle Solver" />
         <meta name="robots" content="index, follow" />
-        <meta property="og:title" content="Sliding Puzzle Master" />
+        <meta
+            property="og:title"
+            content="Sliding Puzzle Solver | Free Online Tool for 3x3, 4x4, 6x6, 10x10 Puzzles"
+        />
         <meta
             property="og:description"
-            content="Interactive sliding puzzle solver supporting customizable dimensions, images, and editable start/goal states with multiple solving algorithms."
+            content="Solve any sliding puzzle online for free - 3x3, 4x4, 6x6, 10x10, hollow, middle empty and no-hole puzzles. Upload your own image or use our templates."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://slidingpuzzlesolver.org/" />
@@ -58,7 +66,7 @@
             <header>
                 <a href="#" class="brand">
                     <div class="logo">SP</div>
-                    <div class="brand-name">Sliding Master</div>
+                    <div class="brand-name">Sliding Puzzle Solver</div>
                 </a>
                 <nav>
                     <ul>
@@ -415,14 +423,23 @@
                                     Customize Image
                                 </div>
                                 <div class="image-input-group">
-                                    <label for="imageInputURL">IMAGE URL:</label>
-                                    <div style="display: flex; gap: 10px; align-items: center; width: 100%;">
+                                    <label for="imageInputURL"
+                                        >IMAGE URL:</label
+                                    >
+                                    <div
+                                        style="
+                                            display: flex;
+                                            gap: 10px;
+                                            align-items: center;
+                                            width: 100%;
+                                        "
+                                    >
                                         <input
                                             type="url"
                                             id="imageInputURL"
                                             name="imageInputURL"
                                             class="imageInputURL"
-                                            style="flex: 1;"
+                                            style="flex: 1"
                                         />
                                         <input
                                             type="file"
@@ -431,7 +448,10 @@
                                         />
                                         <button
                                             class="buttons fontButtons buttonsRow1"
-                                            style="margin-left: 10px; min-width: 100px;"
+                                            style="
+                                                margin-left: 10px;
+                                                min-width: 100px;
+                                            "
                                             onclick="document.getElementById('imageUploadInput').click();"
                                         >
                                             UPLOAD
@@ -640,7 +660,12 @@
                             your puzzle, click this button to try solving it
                             manually by sliding tiles according to puzzle rules.
                         </p>
-                        <p>Note: The puzzle automatically checks if your start and goal states are solvable. If not, it will offer to fix the puzzle by swapping two adjacent non-blank tiles.</p>
+                        <p>
+                            Note: The puzzle automatically checks if your start
+                            and goal states are solvable. If not, it will offer
+                            to fix the puzzle by swapping two adjacent non-blank
+                            tiles.
+                        </p>
                     </div>
                     <div class="faq-item">
                         <h3>Can I use my own images?</h3>
